@@ -1,0 +1,96 @@
+body {
+	width: auto;
+	position: relative;
+}
+
+body:after {
+    position: fixed; /* could also be absolute */ 
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+.brick{ 
+	  margin-left: 10px;
+	  margin-right: 10px;
+      width: 95%;
+      height: 70px;
+      border: 1px solid #333;
+      box-shadow: 8px 8px 5px #444;
+      padding: 8px;
+      background-image: linear-gradient(180deg, #fff, #ddd 40%, #ccc);
+      text-align: center;
+      line-height: 10px;
+     }
+     
+.menu-line{
+  width: 26px;
+  height: 4px;
+  background-color: #FFFFFF;
+  margin: 5px 0;
+}
+
+ .container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 26px;
+  height: 4px;
+  background-color: black;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+/* Rotate first bar.  (-9px, 6px) ;*/
+.changebar1 {
+   background-color: red;
+  -webkit-transform: rotate(-45deg) translate(-5.5px, 6px) ;
+  transform: rotate(-45deg) translate(-5.5px, 6px) ;
+}
+
+/* Fade out the second bar */
+.changebar2 {
+  opacity: 0;
+}
+
+/* Rotate last bar (-8px, -8px)*/
+.changebar3 {
+  background-color: red;
+  -webkit-transform: rotate(45deg) translate(-7px, -7px) ;
+  transform: rotate(45deg) translate(-7px, -7px);
+ }
+ 
+.btngototop{
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -150px;
+    text-align: center;
+    z-index: 11; 
+}
+ 
+.fabSpeedDialdemoBasicUsage .text-capitalize {
+  text-transform: capitalize; }
+
+.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+  background-color:  #000 !important;}
+
+.fabSpeedDialdemoBasicUsage p.note {
+  font-size: 1.2rem; }
+
+.fabSpeedDialdemoBasicUsage .lock-size {
+  min-width: 100px;
+  min-height: 100px;
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.carddemoBasicUsage .card-media {
+  background-color: #999999; }
+    
+     

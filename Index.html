@@ -1,0 +1,256 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="stylesheet" href="CSS/starter-template.css">
+   <link rel="stylesheet" href="Boroved/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="Boroved/angular-1.7.8/angular-material.min.css">
+      
+ <!--<script src="Boroved/bootstrap-4.3.1-dist/js/jquery-3.3.1.min.js"></script>-->
+    <script src="Boroved/angular-1.7.8/angular.min.js"></script>
+    <script src="Boroved/angular-1.7.8/angular-route.min.js"></script>
+    <script src="Boroved/angular-1.7.8/angular-animate.min.js"></script>
+    <script src="Boroved/angular-1.7.8/angular-aria.min.js"></script>
+    <script src="Boroved/angular-1.7.8/angular-messages.min.js"></script>
+    <script src="Boroved/angular-1.7.8/angular-material.min.js"></script>
+    <!--<script src="Boroved/bootstrap-4.3.1-dist/js/ui-bootstrap-2.5.0.min.js"></script>
+    <script src="Boroved/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+    <script src="Boroved/bootstrap-4.3.1-dist/js/jquery-3.3.1.min.js"></script>-->
+    <script type="text/javascript" src="Controler/app.js"></script>
+ </head>
+   <body>
+
+    <div ng-controller="MainMenu as MM" layout="row" ng-cloak>
+    	<md-button class="md-icon-button launch" ng-click="toggleSidenav()">
+              <div id="bar1" class="bar1"></div>
+              <div id="bar2" class="bar2"></div>
+              <div id="bar3" class="bar3"></div>
+        </md-button>
+      <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo">
+          <h1 class="md-toolbar-tools">Головне меню</h1>
+        </md-toolbar>
+        <md-content layout-margin="">
+            <span  layout="column" layout-align="start center">
+              <md-button class="md-raised" ng-click="toggleSidenav()" ng-href="#!">Головна</md-button>
+              <md-button class="md-raised md-primary" ng-click="toggleSidenav()" ng-href="#!calculator">Калькулятор</md-button>
+              <md-button class="md-raised md-warn" ng-click="toggleSidenav()" ng-href="#!about">Про сторінку</md-button>
+            </span>
+        </md-content>
+      </md-sidenav>
+  
+  <div layout="column" ng-controller="DemoCtrl as demo" ng-cloak>	
+   <div class="lock-size" layout="row" layout-align="center center">
+      <md-fab-speed-dial md-open="demo.isOpen" ng-hide= "fabhiddenglobal" md-direction="down" class="md-scale md-fab-top-right" ng-class="{ 'md-hover-full': demo.hover }"
+                       ng-mouseenter="demo.isOpen=true" ng-mouseleave="demo.isOpen=false">
+        <md-fab-trigger>
+          <md-button aria-label="ЗСУ" class="md-fab md-warn">
+            <md-tooltip md-direction="left" md-visible="tooltipVisible">ЗСУ</md-tooltip>
+            <md-icon md-svg-src="img/icons/Emblem_of_the_Ukrainian_Armed_Forces.svg"></md-icon>
+          </md-button>
+        </md-fab-trigger>
+      <md-fab-actions>
+         <div ng-repeat="item in demo.items">
+           <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini" ng-click="demo.printBranch(item)">
+             <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible" md-autohide="false">
+              {{item.name}}
+             </md-tooltip>
+             <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+           </md-button>
+         </div>
+        </md-fab-actions>
+      </md-fab-speed-dial>
+     </div>
+   </div>
+    <md-button class="md-fab md-mini md-primary btngototop" aria-label="Up" ng-click="gotoBottom()">
+          <span style="text-align: center">
+              	B
+          </span>
+    </md-button>
+  </div>
+  
+      
+    <script type="text/ng-template" id="view/home.html">
+       <md-card md-theme="{{'dark-orange'}}" md-theme-watch>
+         <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" style="text-align: center">
+          	{{message}}
+        	</span>
+           </md-card-title-text>
+          </md-card-title>
+      </md-card>
+    </script>
+    
+    <script type="text/ng-template" id="view/calculator.html">
+    <md-card md-theme="{{'dark-blue'}}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span id="top" class="md-headline" style="text-align: center">
+          	{{message1}} {{message2}}
+        	</span>
+           </md-card-title-text>
+         </md-card-title>
+      </md-card>
+      
+      <md-card md-theme="{{'dark-pink'}}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"  id="SelectedBranch" style="text-align: center;">
+          	Сухопутні війська ЗСУ
+            </span>
+           </md-card-title-text>
+         </md-card-title>
+      </md-card>
+ 
+     <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Військове зання</p> 
+                <select size="1" ng-model="kvz" ng-options="json_vz.kvz as json_vz.vz for json_vz in json_vzes" ></select>
+            </span>  
+             <span layout="column" layout-align="start center">
+                <p>Оклад, грн.</p>
+                <p ng-model="s1">{{s1=ovz(kvz)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+    <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Тарифний розряд</p> 
+                <select size="1" ng-model="ktr" ng-options="json_tr.ktr as json_tr.tr for json_tr in json_tres" ></select>
+            </span>  
+             <span layout="column" layout-align="start center">
+                <p>Оклад, грн.</p>
+                <p ng-model="s2">{{s2=otr(ktr)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+    <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Вислуга років</p> 
+                <select size="1" ng-model="kvr" ng-options="json_vr.kvr as json_vr.vr for json_vr in json_vres"></select>
+            </span>  
+            <span layout="column" layout-align="start center">
+                <p>Розмір</p>
+                <p>{{knvr(kvr)}}%</p>
+            </span> 
+             <span layout="column" layout-align="start center">
+                <p>Сума, грн.</p>
+                <p ng-model="s3">{{s3=nvr(kvr, ktr, kvz)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+     <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Особливості служби</p> 
+                <select size="1" ng-model="ops" ng-options="json_kops.kops as json_kops.ops for json_kops in json_kopses" > </select>
+            </span>  
+            <span layout="column" layout-align="start center">
+                <p>Розмір</p>
+                <p>{{kops(ops)}}%</p>
+            </span> 
+             <span layout="column" layout-align="start center">
+                <p>Сума, грн.</p>
+                <p ng-model="s4">{{s4=nops(kvr, ktr, kvz, ops)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+     <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Режимні обмеження</p> 
+                <select size="1" ng-model="ro" ng-options="json_kro.kro as json_kro.ro for json_kro in json_kros" > </select>
+            </span>  
+            <span layout="column" layout-align="start center">
+                <p>Розмір</p>
+                <p>{{kro(ro)}}%</p>
+            </span> 
+             <span layout="column" layout-align="start center">
+                <p>Сума, грн.</p>
+                <p ng-model="s5">{{s5=sro(ktr, ro)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+     <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <span layout="column" layout-align="start center">
+	            <p>Преміювання</p> 
+                <select size="1" ng-model="pzb" ng-options="json_kpzb.kpzb as json_kpzb.pzb for json_kpzb in json_kpzbs"> </select>
+            </span>  
+            <span layout="column" layout-align="start center">
+                <p>Розмір</p>
+                <p>{{kpr(ktr, pzb, kvr)}}%</p>
+            </span> 
+             <span layout="column" layout-align="start center">
+                <p>Сума, грн.</p>
+                <p ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}</p>
+            </span>  
+     	</md-card-actions>
+     </md-card>
+     
+     <md-card md-theme="{{'grey'}}" md-theme-watch>
+     	<md-card-actions layout="row" layout-align="space around">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline" style="text-align: center">
+              	Разом: {{s1 + s2 + s3 + s4 + s5 + s6}} грн.
+            	</span>
+                <span style="text-align: center">
+              	На руки: {{SumGZnaryku()}} грн.
+            	</span>
+              </md-card-title-text>
+            </md-card-title>
+         </md-card-actions>
+     </md-card>
+     
+    </script> 
+     
+    <script type="text/ng-template" id="view/about.html">
+      <md-card md-theme="{{'dark-purple'}}" md-theme-watch>
+         <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" style="text-align: center">
+          	{{message}}
+        	</span>
+           </md-card-title-text>
+          </md-card-title>
+      </md-card>
+    </script> 
+
+  <script type="text/ng-template" id="dialog.html">
+    <md-dialog>
+      <md-toolbar>
+        <div class="md-toolbar-tools">Вид або рід військ ЗСУ</div>
+      </md-toolbar>
+
+      <md-dialog-content layout-padding>
+        <p>Ви вибрали:</p>
+        <h3>{{dialog.item.name}}</h3>
+      </md-dialog-content>
+
+      <div class="md-actions">
+     	<md-button aria-label="Submit dialog" ng-click="dialog.submit()" class="md-primary">
+          Прийняти
+        </md-button>
+        <md-button aria-label="Close dialog" ng-click="dialog.close()" class="md-primary">
+          Відхилити
+        </md-button>
+      </div>
+    </md-dialog>
+  </script>
+<a id="bottom"></a> You're at the bottom!
+<div ng-view></div>
+ 
+  </body>
+</html>
