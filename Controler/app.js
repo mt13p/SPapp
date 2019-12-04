@@ -45,7 +45,7 @@ app.controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll
     }
  });
 
-app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope) {
+app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
     var self = this;
       self.topDirections = ['left', 'up'];
       self.bottomDirections = ['down', 'right'];
@@ -107,6 +107,9 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope) {
           templateUrl: 'dialog.html',
           targetEvent: $event
         });
+      };
+      function scrollTop() {
+        $mdUtil.animateScrollTo(scrollContentEl, 0, 200);
       };
 });
  
