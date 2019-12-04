@@ -161,11 +161,11 @@ app.controller('CalculatorController',
       $scope.json_kpzbs = response.data;
        }); 
     
-     $scope.GetValbyKey=function($tr, $key, $key2, $data){
-     var i, len = $data.length;
+     $scope.GetValbyKey=function($tr, $key, $key2, $datain){
+     var i, len = $datain.length;
       for (i = 0; i < len; i++) {
-        if ($data[i][$key]===$tr) {
-            return $data[i][$key2];
+        if ($datain[i][$key]===$tr) {
+            return $datain[i][$key2];
         }
       }
       return 0;
