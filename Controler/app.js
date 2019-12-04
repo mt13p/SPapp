@@ -47,6 +47,10 @@ app.controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll
 
 app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
     var self = this;
+    var mainContentArea = document.querySelector("[role='main']");
+    var scrollContentEl = mainContentArea.querySelector('md-content[md-scroll-y]');
+    $scope.scrollTop = scrollTop;
+
       self.topDirections = ['left', 'up'];
       self.bottomDirections = ['down', 'right'];
       self.availableModes = ['md-fling', 'md-scale'];
@@ -113,7 +117,32 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $md
       };
 });
  
-    
+/* /** Directive which applies a specified class to the element when being scrolled */
+/* app.directive('docsScrollClass', function() {
+  return {
+    restrict: 'A',
+    link: function($scope, $element, $attr) {
+
+      var scrollParent = $element.parent();
+      var isScrolling = false;
+
+      // Initial update of the state.
+      updateState();
+
+      // Register a scroll listener, which updates the state.
+      scrollParent.on('scroll', updateState);
+
+      function updateState() {
+        var newState = scrollParent[0].scrollTop !== 0;
+
+        if (newState !== isScrolling) {
+          $element.toggleClass($attr.docsScrollClass, newState);
+        }
+
+        isScrolling = newState;
+      }
+    }
+  };  */   
 
 app.controller('HomeController', function($scope, $rootScope) {
   $scope.message = 'Головна сторінка';
@@ -222,18 +251,16 @@ app.controller('AboutController', function($scope, $rootScope) {
 });
 
 
-function handleFileSelect(evt) {
-var files = evt.target.files; // FileList object
+/* function handleFileSelect(evt) {
+  var files = evt.target.files; // FileList object
   // files is a FileList of File objects. List some properties.
-var output = [];
-for (var i = 0, f; f = files[i]; i++) {
-output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-f.size, ' bytes, last modified: ',
-f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-'</li>');
+  var output = [];
+  for (var i = 0, f; f = files[i]; i++) {
+    output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+    f.size, ' bytes, last modified: ',
+    f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+   '</li>');
+  }
+  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
-document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-}
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-	
+document.getElementById('files').addEventListener('change', handleFileSelect, false); */
