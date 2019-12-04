@@ -232,3 +232,5 @@ function handleFileSelect(evt) {
         document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
         }
    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+   }
+	
