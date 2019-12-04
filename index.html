@@ -23,7 +23,7 @@
  </head>
    <body>
 
-    <div ng-controller="MainMenu as MM" layout="row" ng-cloak>
+    <div ng-controller="MainMenu as MM" layout="row" role="main" ng-cloak>
     	<md-button class="md-icon-button launch" ng-click="toggleSidenav()">
               <div id="bar1" class="bar1"></div>
               <div id="bar2" class="bar2"></div>
@@ -65,15 +65,16 @@
       </md-fab-speed-dial>
      </div>
    </div>
-    <md-button class="md-fab md-fab-bottom-right docs-scroll-fab"
-      docs-scroll-class="scrolling"
-      ng-click="scrollTop()"
-      aria-label="Back to Top">
-      <md-tooltip md-direction="top">Back to Top</md-tooltip>
-      <md-icon md-svg-src="img/icons/ic_arrow_up_24px.svg"></md-icon>
-    </md-button>
+    <md-content md-scroll-y layout="column" flex></md-content>
+      <md-button class="md-fab md-fab-bottom-right docs-scroll-fab"
+        docs-scroll-class="scrolling"
+        ng-click="scrollTop()"
+        aria-label="Back to Top">
+        <md-tooltip md-direction="top">Back to Top</md-tooltip>
+        <md-icon md-svg-src="img/icons/ic_arrow_up_24px.svg" class="ng-scope" role="img" aria-hidden="true"></md-icon>
+      </md-button>
+    </md-content>
   </div>
-  
       
     <script type="text/ng-template" id="view/home.html">
        <md-card md-theme="{{'dark-orange'}}" md-theme-watch>
