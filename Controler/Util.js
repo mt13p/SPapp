@@ -801,7 +801,7 @@ function UtilFactory($document, $timeout, $compile, $rootScope, $$mdAnimate, $in
       var scrollChange = scrollEnd - scrollStart;
       var scrollingDown = scrollStart < scrollEnd;
       var startTime = $mdUtil.now();
-
+        alert(2);
       $$rAF(scrollChunk);
 
       function scrollChunk() {
