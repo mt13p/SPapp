@@ -113,37 +113,38 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $md
         });
       };
       function scrollTop() {
+        // alert(1);
         $mdUtil.animateScrollTo(scrollContentEl, 0, 200);
       };
 });
  
 /* /** Directive which applies a specified class to the element when being scrolled */
-app.directive('docsScrollClass', function() {
-   return {
-    restrict: 'A',
-    link: function(scope, element, attr) {
+ app.directive('docsScrollClass', function() {
+    return {
+     restrict: 'A',
+     link: function(scope, element, attr) {
 
-      var scrollParent = element.parent();
-      var isScrolling = false;
+       var scrollParent = element.parent();
+       var isScrolling = false;
 
-      // Initial update of the state.
-      updateState();
+       // Initial update of the state.
+       updateState();
 
-      // Register a scroll listener, which updates the state.
-      scrollParent.on('scroll', updateState);
+       // Register a scroll listener, which updates the state.
+       scrollParent.on('scroll', updateState);
 
-      function updateState() {
-        var newState = scrollParent[0].scrollTop !== 0;
+       function updateState() {
+         var newState = scrollParent[0].scrollTop !== 0;
 
         if (newState !== isScrolling) {
-          element.toggleClass(attr.docsScrollClass, newState);
-        }
+           element.toggleClass(attr.docsScrollClass, newState);
+         }
 
-        isScrolling = newState;
-      }
-    }  
-  }
-});
+         isScrolling = newState;
+       }
+     }  
+   }
+ });
 
 app.controller('HomeController', function($scope, $rootScope) {
   $scope.message = 'Головна сторінка';
