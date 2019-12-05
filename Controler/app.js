@@ -118,12 +118,12 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $md
 });
  
 /* /** Directive which applies a specified class to the element when being scrolled */
-/* app.directive('docsScrollClass', function() {
-  return {
+app.directive('docsScrollClass', function() {
+   return {
     restrict: 'A',
-    link: function($scope, $element, $attr) {
+    link: function(scope, element, attr) {
 
-      var scrollParent = $element.parent();
+      var scrollParent = element.parent();
       var isScrolling = false;
 
       // Initial update of the state.
@@ -136,13 +136,14 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $md
         var newState = scrollParent[0].scrollTop !== 0;
 
         if (newState !== isScrolling) {
-          $element.toggleClass($attr.docsScrollClass, newState);
+          element.toggleClass(attr.docsScrollClass, newState);
         }
 
         isScrolling = newState;
       }
-    }
-  };  */   
+    }  
+  }
+});
 
 app.controller('HomeController', function($scope, $rootScope) {
   $scope.message = 'Головна сторінка';
