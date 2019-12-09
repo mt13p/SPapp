@@ -63,15 +63,6 @@ body:after {
   transform: rotate(45deg) translate(-7px, -7px);
  }
  
-.btngototop{
-    position: fixed;
-    top: 50%; 
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -150px;
-    text-align: center;
-    z-index: 11; 
-}
  
 .fabSpeedDialdemoBasicUsage .text-capitalize {
   text-transform: capitalize; }
@@ -108,6 +99,33 @@ body:after {
 .docs-scroll-fab.scrolling {
    transform: scale(1);
 }
-     
-    
-     
+
+
+.top-link {
+  transition: all .25s ease-in-out;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: inline-flex;
+  
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+   margin: 0 1em 1em 0;
+   border-radius: 50%;
+   padding: .25em;
+  width: 50px;
+  height: 50px;
+  background-color: #F8F8F8;
+  
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  &.hide {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+

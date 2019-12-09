@@ -20,7 +20,7 @@
     <script src="Boroved/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
     <script src="Boroved/bootstrap-4.3.1-dist/js/jquery-3.3.1.min.js"></script>-->
     <script type="text/javascript" src="Controler/app.js"></script>
-    <script type="text/javascript" src="Controler/Util.js"></script>
+    <!--<script type="text/javascript" src="Controler/Util.js"></script>-->
  </head>
    <body>
 
@@ -65,17 +65,13 @@
         </md-fab-actions>
       </md-fab-speed-dial>
      </div>
-   
-    <md-content md-scroll-y layout="column" flex></md-content>
-      <md-button class="md-fab md-fab-bottom-right docs-scroll-fab scrolling"
-        docs-scroll-class="scrolling"
-        ng-click="scrollTop()"
-        aria-label="Back to Top">
-        <md-tooltip md-direction="top">Back to Top</md-tooltip>
-        <md-icon md-svg-src="img/icons/ic_arrow_up_24px.svg" class="ng-scope" role="img" aria-hidden="true"></md-icon>
-      </md-button>
-    </md-content>
     </div>
+      <a class="md-fab md-fab-bottom-right docs-scroll-fab"
+        id="js-top"
+        aria-label="Back to Top">
+       <md-tooltip md-direction="top">Back to Top</md-tooltip>
+       <md-icon md-svg-src="img/icons/ic_arrow_up_24px.svg" class="ng-scope" role="img" aria-hidden="true"></md-icon>
+      </a>
   </div>
       
     <script type="text/ng-template" id="view/home.html">
