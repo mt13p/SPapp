@@ -11,11 +11,18 @@ body:after {
     width: 100%;
     z-index: 10;
 }
-.clm_calc {
+
+.style_clm_calc.full {
   width: 50%;
   left: 50%;
   margin-right: -50%;
   transform: translate(50%, 0);
+}
+.style_clm_calc.min {
+  width: 100%;
+  left: 0%;
+  margin-right: 0%;
+  transform: translate(0, 0);
 }
 .brick{ 
 	  margin-left: 10px;

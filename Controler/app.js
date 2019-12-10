@@ -19,12 +19,14 @@ function($routeProvider, $mdThemingProvider) {
 //}
 
 //function($mdThemingProvider) {
- $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark()
+$mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark()
 $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark()
 $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark()
 $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark()
 $mdThemingProvider.theme('dark-pink').backgroundPalette('pink').dark()
 $mdThemingProvider.theme('grey').backgroundPalette('grey')
+
+
 }
 );
 
@@ -60,28 +62,29 @@ const scrollFunc = () => {
   }
 };
 
-window.addEventListener("scroll", scrollFunc);
+  window.addEventListener("scroll", scrollFunc);
 
-const scrollToTop = () => {
-  // Let's set a variable for the number of pixels we are from the top of the document.
-  const c = document.documentElement.scrollTop || document.body.scrollTop;
-  
-  // If that number is greater than 0, we'll scroll back to 0, or the top of the document.
-  // We'll also animate that scroll with requestAnimationFrame:
-  // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-  if (c > 0) {
-    window.requestAnimationFrame(scrollToTop);
-    // ScrollTo takes an x and a y coordinate.
-    // Increase the '10' value to get a smoother/slower scroll!
-    window.scrollTo(0, c - c / 10);
+  const scrollToTop = () => {
+    // Let's set a variable for the number of pixels we are from the top of the document.
+    const c = document.documentElement.scrollTop || document.body.scrollTop;
+    
+    // If that number is greater than 0, we'll scroll back to 0, or the top of the document.
+    // We'll also animate that scroll with requestAnimationFrame:
+    // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+    if (c > 0) {
+      window.requestAnimationFrame(scrollToTop);
+      // ScrollTo takes an x and a y coordinate.
+      // Increase the '10' value to get a smoother/slower scroll!
+      window.scrollTo(0, c - c / 10);
+    }
+  };
+
+  // When the button is clicked, run our ScrolltoTop function above!
+  scrollToTopButton.onclick = function(e) {
+    e.preventDefault();
+    scrollToTop();
   }
-};
 
-// When the button is clicked, run our ScrolltoTop function above!
-scrollToTopButton.onclick = function(e) {
-  e.preventDefault();
-  scrollToTop();
-}
  });
 
 app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
@@ -258,6 +261,20 @@ app.controller('CalculatorController',
   $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
   $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
+
+  const el_clm_calc = document.getElementById('clm_calc');
+
+  window.addEventListener("resize", function() {
+    if (window.matchMedia("(min-width: 800px)").matches) {
+        
+        el_clm_calc.className = "style_clm_calc full";
+        //console.log("Screen width is at least 800px ");
+    } else {
+        
+        el_clm_calc.className = "style_clm_calc min";
+        //console.log("Screen less than 800px");
+    }
+  });
 });
     
 app.controller('AboutController', function($scope, $rootScope) {
