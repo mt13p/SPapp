@@ -265,7 +265,8 @@ app.controller('CalculatorController',
   const el_clm_calc = document.getElementById('clm_calc');
 
   window.addEventListener("resize", function() {
-    if (window.matchMedia("(min-width: 800px)").matches) {
+    //alert(document.documentElement.clientHeight);
+    if (window.matchMedia("(min-width: 400px)").matches) {
         
         el_clm_calc.className = "style_clm_calc full";
         //console.log("Screen width is at least 800px ");
