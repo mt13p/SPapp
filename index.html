@@ -34,12 +34,11 @@
         <md-toolbar class="md-theme-indigo">
           <h1 class="md-toolbar-tools">Головне меню</h1>
         </md-toolbar>
-        <md-content layout-margin="">
-            <span  layout="column" layout-align="start center">
-              <md-button class="md-raised" ng-click="toggleSidenav()" ng-href="#!">Головна</md-button>
+        <md-content layout="column" layout-align="center stretch" flex>
+              <md-button class="md-raised md-accent" ng-click="toggleSidenav()" ng-href="#!">Головна</md-button>
               <md-button class="md-raised md-primary" ng-click="toggleSidenav()" ng-href="#!calculator">Калькулятор</md-button>
-              <md-button class="md-raised md-warn" ng-click="toggleSidenav()" ng-href="#!about">Про сторінку</md-button>
-            </span>
+              <md-button class="md-raised md-warn" ng-click="toggleSidenav()" ng-href="#!positions">Типові посади</md-button>
+              <md-button class="md-raised md-raised" ng-click="toggleSidenav()" ng-href="#!about">Про сторінку</md-button>
         </md-content>
       </md-sidenav>
   
@@ -108,100 +107,167 @@
            </md-card-title-text>
          </md-card-title>
       </md-card>
- 
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Військове зання</p> 
-                  <select size="1" ng-model="kvz" ng-options="json_vz.kvz as json_vz.vz for json_vz in json_vzes" ></select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Оклад, грн.</p>
-                  <p ng-model="s1">{{s1=ovz(kvz)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
+      
+    <div layout="row" layout-align="space-between center" align="center" flex>
+    <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
+      	<md-card-actions>
+               <md-input-container>
+                <label>Військове зання</label>
+                 <md-select ng-model="kvz" style="min-width: 200px;" md-on-close="clearSearchTerm()" class="selectdemoSelectHeader">
+                	<md-select-header class="md-select-select-header">
+                     <input ng-model="searchTerm"
+                       type="search"
+                       placeholder="Пошук ..."
+                       class="md-select-header-searchbox md-text">
+                     </md-select-header>
+                 	<md-option ng-repeat="json_vz in json_vzes | filter:searchTerm" ng-value="json_vz.kvz" >
+                       {{json_vz.vz}}
+                     </md-option>
+               </md-select>
+             </md-input-container>
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span ng-model="s1" class="Numbers_sum">{{s1=ovz(kvz)}}</span>
+              грн.
+            </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
      
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Тарифний розряд</p> 
-                  <select size="1" ng-model="ktr" ng-options="json_tr.ktr as json_tr.tr for json_tr in json_tres" ></select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Оклад, грн.</p>
-                  <p ng-model="s2">{{s2=otr(ktr)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
+     <div layout="row" layout-align="space-between center" align="center" flex>
+     <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
+      	<md-card-actions>
+             <md-input-container>
+                <label>Тарифний розряд</label>
+                <md-select ng-model="ktr" style="min-width: 200px;">
+               	<md-option ng-repeat="json_tr in json_tres" ng-value="json_tr.ktr">
+                     {{json_tr.tr}}
+                  </md-option>
+               </md-select>
+             </md-input-container>
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s2">{{s2=otr(ktr)}}</span>
+              грн.
+             </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
      
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Вислуга років</p> 
-                  <select size="1" ng-model="kvr" ng-options="json_vr.kvr as json_vr.vr for json_vr in json_vres"></select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Розмір</p>
-                  <p>{{knvr(kvr)}}%</p>
-              </span> 
-              <span layout="column" layout-align="start center">
-                  <p>Сума, грн.</p>
-                  <p ng-model="s3">{{s3=nvr(kvr, ktr, kvz)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
+    <div layout="row" layout-align="space-between center" align="center" flex>
+    <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
+      	<md-card-actions>
+        	<span layout="column">
+               <md-input-container>
+                <label>Вислуга років</label>
+                <md-select ng-model="kvr" style="min-width: 200px;">
+               	<md-option ng-repeat="json_vr in json_vres" ng-value="json_vr.kvr">
+                     {{json_vr.vr}}
+                  </md-option>
+               </md-select>
+             </md-input-container>
+               <span>Розмір: {{knvr(kvr)}}%</span>
+              </span>
+           </md-card-actions>
+       </md-card>
+        <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s3">{{s3=nvr(kvr, ktr, kvz)}}</span>
+              грн.
+             </span>
+           </md-card-actions>
+         </md-card>
+      </md-content>
+      </div>
      
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Особливості служби</p> 
-                  <select size="1" ng-model="ops" ng-options="json_kops.kops as json_kops.ops for json_kops in json_kopses" > </select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Розмір</p>
-                  <p>{{kops(ops)}}%</p>
-              </span> 
-              <span layout="column" layout-align="start center">
-                  <p>Сума, грн.</p>
-                  <p ng-model="s4">{{s4=nops(kvr, ktr, kvz, ops)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
+     <div layout="row" layout-align="space-between center" align="center" flex>
+     <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
+      	<md-card-actions>
+        	<span layout="column">
+               <md-input-container>
+                <label>Особливості служби</label>
+                <md-select ng-model="ops" style="min-width: 200px;">
+               	<md-option ng-repeat="json_kops in json_kopses" ng-value="json_kops.kops">
+                     {{json_kops.ops}}
+                  </md-option>
+               </md-select>
+             </md-input-container>
+               <span>Розмір: {{kops(ops)}}%</span>
+             </span>
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s4">{{s4=nops(kvr, ktr, kvz, ops)}}</span>
+              грн.
+             </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
+
+    <div layout="row" layout-align="space-between center" align="center" flex>
+    <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
+      	<md-card-actions>
+             <span layout="column">
+               <md-input-container>
+                <label>Режимні обмеження</label>
+                <md-select ng-model="ro" style="min-width: 200px;">
+               	<md-option ng-repeat="json_kro in json_kros" ng-value="json_kro.kro">
+                     {{json_kro.ro}}
+                  </md-option>
+                 </md-select>
+               </md-input-container>
+               <span>Розмір: {{kro(ro)}}%</span>
+             </span> 
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s5">{{s5=sro(ktr, ro)}}</span>
+              грн.
+             </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
      
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Режимні обмеження</p> 
-                  <select size="1" ng-model="ro" ng-options="json_kro.kro as json_kro.ro for json_kro in json_kros" > </select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Розмір</p>
-                  <p>{{kro(ro)}}%</p>
-              </span> 
-              <span layout="column" layout-align="start center">
-                  <p>Сума, грн.</p>
-                  <p ng-model="s5">{{s5=sro(ktr, ro)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
-     
-      <md-card md-theme="{{'grey'}}" md-theme-watch>
-        <md-card-actions layout="row" layout-align="space around">
-              <span layout="column" layout-align="start center">
-                <p>Преміювання</p> 
-                  <select size="1" ng-model="pzb" ng-options="json_kpzb.kpzb as json_kpzb.pzb for json_kpzb in json_kpzbs"> </select>
-              </span>  
-              <span layout="column" layout-align="start center">
-                  <p>Розмір</p>
-                  <p>{{kpr(ktr, pzb, kvr)}}%</p>
-              </span> 
-              <span layout="column" layout-align="start center">
-                  <p>Сума, грн.</p>
-                  <p ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}</p>
-              </span>  
-        </md-card-actions>
-      </md-card>
+     <div layout="row" layout-align="space-between center" align="center" flex>
+      <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch style="width:75%">
+      	<md-card-actions>
+               <md-input-container>
+                <label>Преміювання</label>
+                <md-select ng-model="pzb" style="min-width: 200px;">
+               	<md-option ng-repeat="json_kpzb in json_kpzbs" ng-value="json_kpzb.kpzb">
+                     {{json_kpzb.pzb}}
+                  </md-option>
+                 </md-select>
+               </md-input-container>
+               <span>Розмір: {{kpr(ktr, pzb, kvr)}}%</span>
+             </span>
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}</span>
+              грн.
+             </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
      
       <md-card md-theme="{{'grey'}}" md-theme-watch>
         <md-card-actions layout="row" layout-align="space around">
@@ -218,6 +284,18 @@
           </md-card-actions>
       </md-card>
     </div> 
+    </script> 
+    
+    <script type="text/ng-template" id="view/positions.html">
+      <md-card md-theme="{{'dark-purple'}}" md-theme-watch>
+         <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" style="text-align: center">
+          	{{message}}
+        	</span>
+           </md-card-title-text>
+          </md-card-title>
+      </md-card>
     </script> 
      
     <script type="text/ng-template" id="view/about.html">
