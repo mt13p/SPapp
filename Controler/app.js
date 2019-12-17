@@ -11,6 +11,10 @@ function($routeProvider, $mdThemingProvider) {
     templateUrl : 'view/calculator.html',
     controller  : 'CalculatorController'
   })
+  .when('/positions', {
+    templateUrl : 'view/positions.html',
+    controller  : 'PositionsController'
+  })
   .when('/about', {
     templateUrl : 'view/about.html',
     controller  : 'AboutController'
@@ -262,6 +266,11 @@ app.controller('CalculatorController',
   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
   $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
 
+$scope.searchTerm;
+      $scope.clearSearchTerm = function() {
+        $scope.searchTerm = '';
+      };
+
   const el_clm_calc = document.getElementById('clm_calc');
 
   window.addEventListener("resize", function() {
@@ -276,13 +285,18 @@ app.controller('CalculatorController',
         //console.log("Screen less than 800px");
     }
   });
+
+});
+
+app.controller('PositionsController', function($scope, $rootScope) {
+  $scope.message = 'Типові посади';
+  $rootScope.fabhiddenglobal = true;
 });
     
 app.controller('AboutController', function($scope, $rootScope) {
   $scope.message = 'Про сторінку';
   $rootScope.fabhiddenglobal = true;
 });
-
 
 /* function handleFileSelect(evt) {
   var files = evt.target.files; // FileList object
