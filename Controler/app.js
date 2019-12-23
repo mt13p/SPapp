@@ -1,6 +1,7 @@
-var app = angular.module('myApp', ['ngRoute', 'ngMaterial']);
-
-app.config(
+angular
+ .module('myApp', ['ngRoute', 'ngMaterial'])
+ 
+ .config(
 function($routeProvider, $mdThemingProvider) {
   $routeProvider
   .when('/', {
@@ -29,12 +30,69 @@ $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark()
 $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark()
 $mdThemingProvider.theme('dark-pink').backgroundPalette('pink').dark()
 $mdThemingProvider.theme('grey').backgroundPalette('grey')
+})
 
+.factory('GZ', function($http) {
+	var GZ = {}; 
+	$http.get('Data/tbl_vzes.json').then(
+      function(response) {
+      GZ.json_vzes = response.data;
+       });
+    $http.get('Data/tbl_tres.json').then(
+      function(response) {
+      GZ.json_tres = response.data;
+       }); 
+     $http.get('Data/tbl_vres.json').then(
+      function(response) {
+      GZ.json_vres = response.data;
+       }); 
+       $http.get('Data/tbl_kops.json').then(
+      function(response) {
+      GZ.json_kopses = response.data;
+       }); 
+       $http.get('Data/tbl_kro.json').then(
+      function(response) {
+      GZ.json_kros = response.data;
+       }); 
+       $http.get('Data/tbl_kpr1.json').then(
+      function(response) {
+      GZ.json_kpr1s = response.data;
+       }); 
+       $http.get('Data/tbl_kpr2.json').then(
+      function(response) {
+      GZ.json_kpr2s = response.data;
+       }); 
+       $http.get('Data/tbl_kpr3.json').then(
+      function(response) {
+      GZ.json_kpr3s = response.data;
+       }); 
+       $http.get('Data/tbl_kpr4.json').then(
+      function(response) {
+      GZ.json_kpr4s = response.data;
+       }); 
+       $http.get('Data/tbl_kpzb.json').then(
+      function(response) {
+      GZ.json_kpzbs = response.data;
+       });
+       $http.get('Data/position.json').then(
+      function(response) {
+      GZ.positions = response.data;
+       }); 
+	
+	GZ.GetValbyKey=function($sval, $key, $key2, $datain){
+     //alert("Ok");
+     var i, len = $datain.length;
+      for (i = 0; i < len; i++) {
+        if ($datain[i][$key]===$sval) {
+            return $datain[i][$key2];
+        }
+      }
+      return 0;
+    };
+    return GZ;
+})
 
-}
-);
-
-app.controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll) {
+.controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll) {
 	//$scope.$on("$mdMenuClose", function() {
       // alert("menu closing");
       //$scope.hover=false;
@@ -88,10 +146,9 @@ const scrollFunc = () => {
     e.preventDefault();
     scrollToTop();
   }
+ })
 
- });
-
-app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
+.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
     var self = this;
     var mainContentArea = document.querySelector("[role='main']");
     var scrollContentEl = mainContentArea.querySelector('md-content[md-scroll-y]');
@@ -162,26 +219,27 @@ app.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $md
         // alert(1);
         $mdUtil.animateScrollTo(scrollContentEl, 0, 200);
       };
-});
+})
  
 
-
-app.controller('HomeController', function($scope, $rootScope) {
+.controller('HomeController', function($scope, $rootScope) {
   $scope.message = 'Головна сторінка';
   $rootScope.fabhiddenglobal = true;
-});
+})
 
-app.controller('CalculatorController', 
-  function($scope, $rootScope, $http, $location, $anchorScroll, $window) {
+.controller('CalculatorController', function($scope, $rootScope, $http, $location, $anchorScroll, $window, GZ) {
   $rootScope.fabhiddenglobal = false;
-  $http.get('Data/tbl_vzes.json').then(
+
+      $http.get('Data/tbl_vzes.json').then(
       function(response) {
       $scope.json_vzes = response.data;
        });
-    $http.get('Data/tbl_tres.json').then(
-      function(response) {
-      $scope.json_tres = response.data;
+
+      $http.get('Data/tbl_tres.json').then(
+        function(response) {
+        $scope.json_tres = response.data;
        }); 
+      
      $http.get('Data/tbl_vres.json').then(
       function(response) {
       $scope.json_vres = response.data;
@@ -213,22 +271,13 @@ app.controller('CalculatorController',
        $http.get('Data/tbl_kpzb.json').then(
       function(response) {
       $scope.json_kpzbs = response.data;
+       });
+       $http.get('Data/position.json').then(
+      function(response) {
+      $scope.positions = response.data;
        }); 
-    
-     $scope.GetValbyKey=function($tr, $key, $key2, $datain){
-     var i, len = $datain.length;
-      for (i = 0; i < len; i++) {
-        if ($datain[i][$key]===$tr) {
-            return $datain[i][$key2];
-        }
-      }
-      return 0;
-    };
-
-    
-   
-    
-  $scope.message1 = 'Калькулятор';
+       
+  $scope.message1 = 'Конструктор';
   $scope.message2 = 'грошового забезпечення';
   $scope.kvz="0.3";
   $scope.ktr="1.4";
@@ -236,7 +285,7 @@ app.controller('CalculatorController',
   $scope.ops="1";
   $scope.ro="0";
   $scope.pzb="1";
-  $scope.json_prem=$scope.json_kpr1s;
+  $scope.json_prem=GZ.json_kpr1s;
   $rootScope.flag_prem=1;
   
   $scope.ovz = function($kvz=0) {return Math.round(($kvz*1762)/10)*10};
@@ -251,24 +300,28 @@ app.controller('CalculatorController',
   $scope.kro = function($kro=0) {return $kro*100};
   $scope.sro = function($ktr=0, $kro=0)  {return Math.round(($kro*$scope.otr($ktr))*100)/100};
   $scope.kpr = function($ktr=0, $kpzb=0, $kvr=0) {
-  	var vr = $scope.GetValbyKey($kvr, 'kvr', 'vr', $scope.json_vres);
+  	var vr = GZ.GetValbyKey($kvr, 'kvr', 'vr', GZ.json_vres);
       if (vr>=1) {
-  	  if ($rootScope.flag_prem==1) {$scope.json_prem=$scope.json_kpr2s};
-        if ($rootScope.flag_prem==2) {$scope.json_prem=$scope.json_kpr4s};
+  	  if ($rootScope.flag_prem==1) {$scope.json_prem=GZ.json_kpr2s};
+        if ($rootScope.flag_prem==2) {$scope.json_prem=GZ.json_kpr4s};
       } else {
-    	if ($rootScope.flag_prem==1) {$scope.json_prem=$scope.json_kpr1s};
-        if ($rootScope.flag_prem==2) {$scope.json_prem=$scope.json_kpr3s};
+    	if ($rootScope.flag_prem==1) {$scope.json_prem=GZ.json_kpr1s};
+        if ($rootScope.flag_prem==2) {$scope.json_prem=GZ.json_kpr3s};
      };
-     var tr=$scope.GetValbyKey($ktr, 'ktr', 'tr', $scope.json_tres);
-     var pr=$scope.GetValbyKey(tr, 'kpr', 'pr', $scope.json_prem);
+     var tr=GZ.GetValbyKey($ktr, 'ktr', 'tr', GZ.json_tres);
+     var pr=GZ.GetValbyKey(tr, 'kpr', 'pr', $scope.json_prem);
      return Math.round($kpzb*pr*100*100)/100};
   $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
   $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
 
-$scope.searchTerm;
-      $scope.clearSearchTerm = function() {
-        $scope.searchTerm = '';
+$scope.searchTermVZ;
+      $scope.clearSearchTermVZ = function() {
+        $scope.searchTermVZ = '';
+      };
+ $scope.searchTermTR;
+      $scope.clearSearchTermTR= function() {
+        $scope.searchTermTR= '';
       };
 
   const el_clm_calc = document.getElementById('clm_calc');
@@ -286,14 +339,47 @@ $scope.searchTerm;
     }
   });
 
-});
+})
 
-app.controller('PositionsController', function($scope, $rootScope) {
+.controller('PositionsController', function($scope, $rootScope, $http, $mdDialog, GZ) {
   $scope.message = 'Типові посади';
   $rootScope.fabhiddenglobal = true;
-});
+  $http.get('Data/position.json').then(
+      function(response) {
+      $scope.positions = response.data;
+      }); 
+   //$scope.positions = GZ.positions;
+   var testjson=[{"name":"Текелажник", "vz":"солдат", "tr":"1"},
+  {"name":"Командир взводу", "vz":"лейтенант", "tr":"12"},
+  {"name":"Командир роти", "vz":"капітан", "tr":"20"},
+  {"name":"Командир батальйону", "vz":"майор", "tr":"25"},
+  {"name":"Командир полку", "vz":"полковник", "tr":"31"},
+  {"name":"Командир бригади", "vz":"полковник", "tr":"39"},
+  {"name":"Старший офіцер", "vz":"полковник", "tr":"30"}];
+  //  alert(testjson[6].name);
+   //alert(GZ.positions[6].name);
+   $scope.CalcPosition = function(position) {
+      $scope.kvz=GZ.GetValbyKey(position.vz, 'vz', 'kvz', GZ.json_vzes);
+      $scope.ktr=GZ.GetValbyKey(position.tr, 'tr', 'ktr', GZ.json_tres);
+      $scope.kvr="0";
+      $scope.ops="1";
+      $scope.ro="0";
+      $scope.pzb="1";
+    };
+    $scope.DetailsPosition = function(position, event) {
+    var ktr=GZ.GetValbyKey(position.tr, 'tr', 'ktr', GZ.json_tres);
+    $mdDialog.show(
+      $mdDialog.alert()
+        .title(position.name)
+        .textContent(position.vz + " " + ktr)
+        .ariaLabel('Порівняння посади')
+        .ok('Закрити')
+        .targetEvent(event)
+    );
+  };
+})
     
-app.controller('AboutController', function($scope, $rootScope) {
+.controller('AboutController', function($scope, $rootScope) {
   $scope.message = 'Про сторінку';
   $rootScope.fabhiddenglobal = true;
 });
