@@ -356,7 +356,7 @@ $scope.searchTermVZ;
   {"name":"Командир полку", "vz":"полковник", "tr":"31"},
   {"name":"Командир бригади", "vz":"полковник", "tr":"39"},
   {"name":"Старший офіцер", "vz":"полковник", "tr":"30"}];
-    alert(testjson[6].name);
+    // alert(testjson[6].name);
    //alert(GZ.positions[6].name);
    $scope.CalcPosition = function(position) {
       $scope.kvz=GZ.GetValbyKey(position.vz, 'vz', 'kvz', GZ.json_vzes);
