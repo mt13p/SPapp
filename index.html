@@ -114,14 +114,14 @@
       	<md-card-actions>
                <md-input-container>
                 <label>Військове зання</label>
-                 <md-select ng-model="kvz" style="min-width: 200px;" md-on-close="clearSearchTerm()" class="selectdemoSelectHeader">
+                 <md-select ng-model="kvz" style="min-width: 200px;" md-on-close="clearSearchTermVZ()" class="selectdemoSelectHeader">
                 	<md-select-header class="md-select-select-header">
-                     <input ng-model="searchTerm"
+                     <input ng-model="searchTermVZ"
                        type="search"
                        placeholder="Пошук ..."
                        class="md-select-header-searchbox md-text">
                      </md-select-header>
-                 	<md-option ng-repeat="json_vz in json_vzes | filter:searchTerm" ng-value="json_vz.kvz" >
+                 	<md-option ng-repeat="json_vz in json_vzes | filter:searchTermVZ" ng-value="json_vz.kvz" >
                        {{json_vz.vz}}
                      </md-option>
                </md-select>
@@ -144,9 +144,15 @@
       	<md-card-actions>
              <md-input-container>
                 <label>Тарифний розряд</label>
-                <md-select ng-model="ktr" style="min-width: 200px;">
-               	<md-option ng-repeat="json_tr in json_tres" ng-value="json_tr.ktr">
-                     {{json_tr.tr}}
+                <md-select ng-model="ktr" style="min-width: 200px;" md-on-close="clearSearchTermTR()" class="selectdemoSelectHeader">
+                	<md-select-header class="md-select-select-header">
+                	<input ng-model="searchTermTR"
+                       type="search"
+                       placeholder="Пошук ..."
+                       class="md-select-header-searchbox md-text">
+                     </md-select-header>
+               	<md-option ng-repeat="json_tr in json_tres | filter:searchTermTR" ng-value="json_tr.ktr">
+                     {{json_tr.tr}} т.р.
                   </md-option>
                </md-select>
              </md-input-container>
@@ -171,11 +177,11 @@
                 <label>Вислуга років</label>
                 <md-select ng-model="kvr" style="min-width: 200px;">
                	<md-option ng-repeat="json_vr in json_vres" ng-value="json_vr.kvr">
-                     {{json_vr.vr}}
+                     {{json_vr.vr}} р. або {{knvr(json_vr.kvr)}}%
                   </md-option>
                </md-select>
              </md-input-container>
-               <span>Розмір: {{knvr(kvr)}}%</span>
+               <!--<span>Розмір: {{knvr(kvr)}}%</span>--!>
               </span>
            </md-card-actions>
        </md-card>
@@ -198,11 +204,11 @@
                 <label>Особливості служби</label>
                 <md-select ng-model="ops" style="min-width: 200px;">
                	<md-option ng-repeat="json_kops in json_kopses" ng-value="json_kops.kops">
-                     {{json_kops.ops}}
+                     {{json_kops.ops}} або {{kops(json_kops.ops)}}%
                   </md-option>
                </md-select>
              </md-input-container>
-               <span>Розмір: {{kops(ops)}}%</span>
+              <!-- <span>Розмір: {{kops(ops)}}%</span>--!>
              </span>
            </md-card-actions>
        </md-card>
@@ -225,11 +231,11 @@
                 <label>Режимні обмеження</label>
                 <md-select ng-model="ro" style="min-width: 200px;">
                	<md-option ng-repeat="json_kro in json_kros" ng-value="json_kro.kro">
-                     {{json_kro.ro}}
+                     {{json_kro.ro}} або {{kro(json_kro.kro)}}%
                   </md-option>
                  </md-select>
                </md-input-container>
-               <span>Розмір: {{kro(ro)}}%</span>
+              <!--  <span>Розмір: {{kro(ro)}}%</span>--!>
              </span> 
            </md-card-actions>
        </md-card>
@@ -296,6 +302,13 @@
            </md-card-title-text>
           </md-card-title>
       </md-card>
+      <md-list ng-cloak>
+      	<md-list-item ng-repeat="position in positions" ng-href="#!calculator" ng-click="CalcPosition(position)">
+             <p>{{position.name}}</p>
+             <md-icon md-svg-icon="img/icons/cogwheel.svg"  ng-click="DetailsPosition(position, $event)" aria-label="З чого рахується грошове забезпечення" class="md-secondary md-hue-3" ></md-icon>
+             <md-divider></md-divider>
+          </md-list-item>
+      </md-list>
     </script> 
      
     <script type="text/ng-template" id="view/about.html">
