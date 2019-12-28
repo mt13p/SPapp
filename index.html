@@ -130,7 +130,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span ng-model="s1" class="Numbers_sum">{{s1=ovz(kvz)}}</span>
+              <span ng-model="s1" class="Numbers_sum">{{s1}}</span>
               грн.
             </span>
            </md-card-actions>
@@ -160,7 +160,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s2">{{s2=otr(ktr)}}</span>
+              <span class="Numbers_sum" ng-model="s2">{{s2}}</span>
               грн.
              </span>
            </md-card-actions>
@@ -187,7 +187,7 @@
        </md-card>
         <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s3">{{s3=nvr(kvr, ktr, kvz)}}</span>
+              <span class="Numbers_sum" ng-model="s3">{{s3}}</span>
               грн.
              </span>
            </md-card-actions>
@@ -214,7 +214,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s4">{{s4=nops(kvr, ktr, kvz, ops)}}</span>
+              <span class="Numbers_sum" ng-model="s4">{{s4}}</span>
               грн.
              </span>
            </md-card-actions>
@@ -241,7 +241,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s5">{{s5=sro(ktr, ro)}}</span>
+              <span class="Numbers_sum" ng-model="s5">{{s5)}}</span>
               грн.
              </span>
            </md-card-actions>
@@ -267,7 +267,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}</span>
+              <span class="Numbers_sum" ng-model="s6">{{s6}}</span>
               грн.
              </span>
            </md-card-actions>
@@ -280,7 +280,7 @@
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-headline" style="text-align: center">
-                  Разом: {{s1 + s2 + s3 + s4 + s5 + s6}} грн.
+                  Разом: {{SumGZ()}} грн.
                 </span>
                   <span style="text-align: center">
                   На руки: {{SumGZnaryku()}} грн.
