@@ -173,21 +173,20 @@
       <md-card md-theme="{{'grey'}}" md-theme-watch layout="column" style="width:75%">
       	<md-card-actions>
         	<span layout="column">
-               <md-input-container>
+              <md-input-container>
                 <label>Вислуга років</label>
                 <md-select ng-model="kvr" style="min-width: 200px;">
-               	<md-option ng-repeat="json_vr in json_vres" ng-value="json_vr.kvr">
+               	  <md-option ng-repeat="json_vr in json_vres" ng-value="json_vr.kvr">
                      {{json_vr.vr}} р. або {{knvr(json_vr.kvr)}}%
-                  </md-option>
-               </md-select>
-             </md-input-container>
-               <!--<span>Розмір: {{knvr(kvr)}}%</span>--!>
-              </span>
-           </md-card-actions>
-       </md-card>
-        <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+            </span>
+          </md-card-actions>
+        </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s3">{{s3}}</span>
+            <span class="Numbers_sum" ng-model="s3">{{s3}}
               грн.
              </span>
            </md-card-actions>
@@ -208,13 +207,11 @@
                   </md-option>
                </md-select>
              </md-input-container>
-              <!-- <span>Розмір: {{kops(ops)}}%</span>--!>
-             </span>
            </md-card-actions>
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s4">{{s4}}</span>
+              <span class="Numbers_sum" ng-model="s4">{{s4}}
               грн.
              </span>
            </md-card-actions>
@@ -235,13 +232,11 @@
                   </md-option>
                  </md-select>
                </md-input-container>
-              <!--  <span>Розмір: {{kro(ro)}}%</span>--!>
-             </span> 
            </md-card-actions>
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s5">{{s5)}}</span>
+              <span class="Numbers_sum" ng-model="s5">{{s5}}
               грн.
              </span>
            </md-card-actions>
@@ -267,7 +262,7 @@
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s6">{{s6}}</span>
+              <span class="Numbers_sum" ng-model="s6">{{s6}}
               грн.
              </span>
            </md-card-actions>
