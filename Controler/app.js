@@ -1,5 +1,68 @@
+function InitFunck($http, $rootScope) {
+  var InitFunck = {};
+  
+  InitFunck.initialized = false;
+  InitFunck.getJSON = function (path) {
+    var xhr = new XMLHttpRequest();
+    InitFunck.initialized = false;
+    xhr.open('GET', path, false);// false - будет ждать пока не выполнит get
+    xhr.send();
+    if (xhr.status != 200) {
+     // обработать ошибку
+      alert(xhr.status + ': ' + xhr.statusText); // пример вывода: 404: Not Found
+    } else {
+     // вывести результат
+     InitFunck.initialized = true;
+     return JSON.parse(xhr.responseText);
+   //  alert( xhr.responseText ); // responseText -- текст ответа.
+    };
+  };
+  InitFunck.initialize = function () {
+    $rootScope.positions=InitFunck.getJSON('Data/position.json');
+    $rootScope.json_vzes=InitFunck.getJSON('Data/tbl_vzes.json');
+    $rootScope.json_tres=InitFunck.getJSON('Data/tbl_tres.json');
+    $rootScope.json_vres=InitFunck.getJSON('Data/tbl_vres.json');
+    $rootScope.json_kopses=InitFunck.getJSON('Data/tbl_kops.json');
+    $rootScope.json_kros=InitFunck.getJSON('Data/tbl_kro.json');
+    $rootScope.json_kpr1s=InitFunck.getJSON('Data/tbl_kpr1.json');
+    $rootScope.json_kpr2s=InitFunck.getJSON('Data/tbl_kpr2.json');
+    $rootScope.json_kpr3s=InitFunck.getJSON('Data/tbl_kpr3.json');
+    $rootScope.json_kpr4s=InitFunck.getJSON('Data/tbl_kpr4.json');
+    $rootScope.json_kpzbs=InitFunck.getJSON('Data/tbl_kpzb.json');
+    $rootScope.kvz="0.3";
+    $rootScope.ktr="1.4";
+    $rootScope.kvr="0";
+    $rootScope.ops="1";
+    $rootScope.ro="0";
+    $rootScope.pzb="1";
+    InitFunck.changeflagPrem(1);  
+    $rootScope.json_prem=$rootScope.json_kpr1s;
+  };
+  InitFunck.changeflagPrem = function (selectvalue) {
+  	$rootScope.flag_prem = selectvalue;
+  };
+  InitFunck.changeflagPrembyname= function (selname) {
+      if ((selname=="Десантно-штурмові війська") || (selname=="Сили спеціальних операцій")) {
+          InitFunck.changeflagPrem(2);
+      } else {
+         InitFunck.changeflagPrem(1);
+      }
+   };
+  InitFunck.hideshowFAB = function (selectvalue) {
+  	$rootScope.fabhiddenglobal = selectvalue;
+  };
+  InitFunck.GetValbyKey=function($sval, $key, $key2, $datain){
+     var i, len = $datain.length;
+     for (i = 0; i < len; i++) {if ($datain[i][$key]===$sval) {return $datain[i][$key2];}}
+     return 0;
+  };
+  return InitFunck;
+}
+
 angular
  .module('myApp', ['ngRoute', 'ngMaterial'])
+ 
+ .factory('InitFunck', InitFunck)
  
  .config(
 function($routeProvider, $mdThemingProvider) {
@@ -7,23 +70,35 @@ function($routeProvider, $mdThemingProvider) {
   .when('/', {
     templateUrl : 'view/home.html',
     controller  : 'HomeController',
+    resolve : {function(InitFunck) {InitFunck.hideshowFAB(true);}
+     }
   })
   .when('/calculator', {
     templateUrl : 'view/calculator.html',
-    controller  : 'CalculatorController'
+    controller  : 'CalculatorController',
+    resolve : {function(InitFunck) {
+         InitFunck.hideshowFAB(false);
+         if (!InitFunck.initialized) {InitFunck.initialize()};
+        }
+     }
   })
   .when('/positions', {
     templateUrl : 'view/positions.html',
-    controller  : 'PositionsController'
+    controller  : 'PositionsController',
+    resolve : {function(InitFunck) {
+        InitFunck.hideshowFAB(true);
+        if (!InitFunck.initialized) {InitFunck.initialize()};
+        }
+     }
   })
   .when('/about', {
     templateUrl : 'view/about.html',
-    controller  : 'AboutController'
+    controller  : 'AboutController',
+    resolve : {function(InitFunck) {InitFunck.hideshowFAB(true);}
+     }
   })
   .otherwise({redirectTo: '/'});
-//}
 
-//function($mdThemingProvider) {
 $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark()
 $mdThemingProvider.theme('dark-orange').backgroundPalette('orange').dark()
 $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark()
@@ -32,82 +107,10 @@ $mdThemingProvider.theme('dark-pink').backgroundPalette('pink').dark()
 $mdThemingProvider.theme('grey').backgroundPalette('grey')
 })
 
-.run(function($http, $rootScope){
-  $http.get('Data/position.json').then(function(response) {
-    $rootScope.positions = response.data;
-   });
-   $http.get('Data/tbl_vzes.json').then(
-      function(response) {
-      $rootScope.json_vzes = response.data;
-       });
-    $http.get('Data/tbl_tres.json').then(
-      function(response) {
-      $rootScope.json_tres = response.data;
-       }); 
-     $http.get('Data/tbl_vres.json').then(
-      function(response) {
-      $rootScope.json_vres = response.data;
-       }); 
-       $http.get('Data/tbl_kops.json').then(
-      function(response) {
-      $rootScope.json_kopses = response.data;
-       }); 
-       $http.get('Data/tbl_kro.json').then(
-      function(response) {
-      $rootScope.json_kros = response.data;
-       }); 
-       $http.get('Data/tbl_kpr1.json').then(
-      function(response) {
-      $rootScope.json_kpr1s = response.data;
-       }); 
-       $http.get('Data/tbl_kpr2.json').then(
-      function(response) {
-      $rootScope.json_kpr2s = response.data;
-       }); 
-       $http.get('Data/tbl_kpr3.json').then(
-      function(response) {
-      $rootScope.json_kpr3s = response.data;
-       }); 
-       $http.get('Data/tbl_kpr4.json').then(
-      function(response) {
-      $rootScope.json_kpr4s = response.data;
-       }); 
-       $http.get('Data/tbl_kpzb.json').then(
-      function(response) {
-      $rootScope.json_kpzbs = response.data;
-       });
-       
-  $rootScope.kvz="0.3";
-  $rootScope.ktr="1.4";
-  $rootScope.kvr="0";
-  $rootScope.ops="1";
-  $rootScope.ro="0";
-  $rootScope.pzb="1";
-  
-})
+//.run(function($http, $rootScope, InitFunck){})
 
-
-.factory('GZ', function($http) {
-	var GZ = {}; 
-	
-	GZ.GetValbyKey=function($sval, $key, $key2, $datain){
-     //alert("Ok");
-     var i, len = $datain.length;
-      for (i = 0; i < len; i++) {
-        if ($datain[i][$key]===$sval) {
-            return $datain[i][$key2];
-        }
-      }
-      return 0;
-    };
-    return GZ;
-})
 
 .controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll) {
-	//$scope.$on("$mdMenuClose", function() {
-      // alert("menu closing");
-      //$scope.hover=false;
-  //  });
   $scope.gotoBottom = function() {
       $location.hash('top');
       $anchorScroll();
@@ -118,15 +121,12 @@ $mdThemingProvider.theme('grey').backgroundPalette('grey')
         $mdSidenav(componentId).toggle();
       };
     }
- 
 // Set a variable for our button element.
 const scrollToTopButton = document.getElementById('js-top');
-
 // Let's set up a function that shows our scroll-to-top button if we scroll beyond the height of the initial window.
 const scrollFunc = () => {
   // Get the current scroll value
   let y = window.scrollY;
-  
   // If the scroll value is greater than the window height, let's add a class to the scroll-to-top button to show it!
   if (y > 0) {
     scrollToTopButton.className = "top-link show";
@@ -140,7 +140,6 @@ const scrollFunc = () => {
   const scrollToTop = () => {
     // Let's set a variable for the number of pixels we are from the top of the document.
     const c = document.documentElement.scrollTop || document.body.scrollTop;
-    
     // If that number is greater than 0, we'll scroll back to 0, or the top of the document.
     // We'll also animate that scroll with requestAnimationFrame:
     // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
@@ -151,7 +150,6 @@ const scrollFunc = () => {
       window.scrollTo(0, c - c / 10);
     }
   };
-
   // When the button is clicked, run our ScrolltoTop function above!
   scrollToTopButton.onclick = function(e) {
     e.preventDefault();
@@ -159,7 +157,7 @@ const scrollFunc = () => {
   }
  })
 
-.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil) {
+.controller('DemoCtrl', function($scope, $mdDialog, $timeout, $rootScope, $mdUtil, InitFunck) {
     var self = this;
     var mainContentArea = document.querySelector("[role='main']");
     var scrollContentEl = mainContentArea.querySelector('md-content[md-scroll-y]');
@@ -178,11 +176,9 @@ const scrollFunc = () => {
         { name: "Десантно-штурмові війська", icon: "img/icons/DSHV.svg", direction: "left" },
         { name: "Сили спеціальних операцій", icon: "img/icons/USF_emblem.svg", direction: "left" }
       ];
-      //$rootScope.fabhiddenglobal=false;
       self.hidden = $rootScope.fabhiddenglobal;
       self.isOpen = false;
       self.hover = false;
-      
       // On opening, add a delayed property which shows tooltips after the speed dial has opened
       // so that they have the proper position; if closing, immediately hide the tooltips
       $scope.$watch('demo.isOpen', function(isOpen) {
@@ -197,11 +193,10 @@ const scrollFunc = () => {
       self.printBranch = function(item) {
         document.getElementById('SelectedBranch').innerHTML = item.name + ' ЗСУ';
         if ((item.name=="Десантно-штурмові війська") || (item.name=="Сили спеціальних операцій")) {
-          $rootScope.flag_prem=2
+          InitFunck.changeflagPrem(2);
         } else {
-          $rootScope.flag_prem=1
+          InitFunck.changeflagPrem(1);
         }
-        //$scope.ChangePr($scope.kvr);
   	 };
       self.openDialog = function($event, item) {
       	//ng-click="demo.openDialog($event, item)"
@@ -227,25 +222,18 @@ const scrollFunc = () => {
         });
       };
       function scrollTop() {
-        // alert(1);
         $mdUtil.animateScrollTo(scrollContentEl, 0, 200);
       };
 })
  
 
-.controller('HomeController', function($scope, $rootScope) {
+.controller('HomeController', function($scope, $rootScope, InitFunck) {
   $scope.message = 'Головна сторінка';
-  $rootScope.fabhiddenglobal = true;
 })
 
-.controller('CalculatorController', function($scope, $rootScope, $http, $location, $anchorScroll, $window, GZ) {
-  $rootScope.fabhiddenglobal = false;
-       
+.controller('CalculatorController', function($scope, $rootScope, $http, $location, $anchorScroll, $window, InitFunck) {
   $scope.message1 = 'Конструктор';
   $scope.message2 = 'грошового забезпечення';
-  
-  $rootScope.json_prem=$rootScope.json_kpr1s;
-  $rootScope.flag_prem=1;
   
   $scope.ovz = function($kvz=0) {return Math.round(($kvz*1762)/10)*10};
   $scope.otr = function($ktr=0) {return Math.round(($ktr*1762)/10)*10};
@@ -259,7 +247,7 @@ const scrollFunc = () => {
   $scope.kro = function($kro=0) {return $kro*100};
   $scope.sro = function($ktr=0, $kro=0)  {return Math.round(($kro*$scope.otr($ktr))*100)/100};
   $scope.kpr = function($ktr=0, $kpzb=0, $kvr=0) {
-  	var vr = GZ.GetValbyKey($kvr, 'kvr', 'vr', $rootScope.json_vres);
+  	var vr = InitFunck.GetValbyKey($kvr, 'kvr', 'vr', $rootScope.json_vres);
       if (vr>=1) {
   	  if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr2s};
         if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr4s};
@@ -267,20 +255,20 @@ const scrollFunc = () => {
     	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr1s};
         if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr3s};
      };
-     var tr=GZ.GetValbyKey($ktr, 'ktr', 'tr', $rootScope.json_tres);
-     var pr=GZ.GetValbyKey(tr, 'kpr', 'pr', $rootScope.json_prem);
+     var tr=InitFunck.GetValbyKey($ktr, 'ktr', 'tr', $rootScope.json_tres);
+     var pr=InitFunck.GetValbyKey(tr, 'kpr', 'pr', $rootScope.json_prem);
      return Math.round($kpzb*pr*100*100)/100};
      $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
   
-  $scope.s1=$scope.ovz($rootScope.kvz);
-  $scope.s2=$scope.otr($rootScope.ktr);
-  $scope.s3=$scope.nvr($rootScope.kvr, $rootScope.ktr, $rootScope.kvz);
-  $scope.s4=$scope.nops($rootScope.kvr, $rootScope.ktr, $rootScope.kvz, $rootScope.ops);
-  $scope.s5=$scope.sro($rootScope.ktr, $rootScope.ro);
-  $scope.s6=$scope.spr($rootScope.ktr, $rootScope.pzb, $rootScope.kvr);
+   $scope.s1=$scope.ovz($rootScope.kvz);
+   $scope.s2=$scope.otr($rootScope.ktr);
+   $scope.s3=$scope.nvr($rootScope.kvr, $rootScope.ktr, $rootScope.kvz);
+   $scope.s4=$scope.nops($rootScope.kvr, $rootScope.ktr, $rootScope.kvz, $rootScope.ops);
+   $scope.s5=$scope.sro($rootScope.ktr, $rootScope.ro);
+   $scope.s6=$scope.spr($rootScope.ktr, $rootScope.pzb, $rootScope.kvr);
   
    $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
-  $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
+   $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
 
 $scope.searchTermVZ;
       $scope.clearSearchTermVZ = function() {
@@ -307,22 +295,21 @@ $scope.searchTermVZ;
   }); 
 })
 
-.controller('PositionsController', function($scope, $rootScope, $http, $mdDialog, GZ) {
+.controller('PositionsController', function($scope, $rootScope, $mdDialog, InitFunck) {
   $scope.message = 'Типові посади';
-  $rootScope.fabhiddenglobal = true;
- // alert($rootScope.json_vzes);
+ 
    $scope.CalcPosition = function(position) {
-      $rootScope.kvz=GZ.GetValbyKey(position.vz, 'vz', 'kvz', $rootScope.json_vzes);
-      $rootScope.ktr=GZ.GetValbyKey(position.tr, 'tr', 'ktr', $rootScope.json_tres);
-      $rootScope.kvr=GZ.GetValbyKey(position.vr, 'vr', 'kvr', $rootScope.json_vres);
+      $rootScope.kvz=InitFunck.GetValbyKey(position.vz, 'vz', 'kvz', $rootScope.json_vzes);
+      $rootScope.ktr=InitFunck.GetValbyKey(position.tr, 'tr', 'ktr', $rootScope.json_tres);
+      $rootScope.kvr=InitFunck.GetValbyKey(position.vr, 'vr', 'kvr', $rootScope.json_vres);
       $rootScope.ops="1";
-      $rootScope.ro=GZ.GetValbyKey(position.ro, 'ro', 'kro', $rootScope.json_kros);
+      $rootScope.ro=InitFunck.GetValbyKey(position.ro, 'ro', 'kro', $rootScope.json_kros);
       $rootScope.pzb="1";
       $rootScope.json_prem=$rootScope.json_kpr1s;
       $rootScope.flag_prem=1;
     };
     $scope.DetailsPosition = function(position, event) {
-    var ktr=GZ.GetValbyKey(position.tr, 'tr', 'ktr', $rootScope.json_tres);
+    var ktr=InitFunck.GetValbyKey(position.tr, 'tr', 'ktr', $rootScope.json_tres);
     $mdDialog.show(
       $mdDialog.alert()
         .title(position.name)
@@ -334,9 +321,8 @@ $scope.searchTermVZ;
   };
 })
     
-.controller('AboutController', function($scope, $rootScope) {
+.controller('AboutController', function($scope, $rootScope, InitFunck) {
   $scope.message = 'Про сторінку';
-  $rootScope.fabhiddenglobal = true;
 });
 
 /* function handleFileSelect(evt) {
