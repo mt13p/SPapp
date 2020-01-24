@@ -260,14 +260,14 @@ const scrollFunc = () => {
      return Math.round($kpzb*pr*100*100)/100};
      $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
   
-   $scope.s1_vz = function() {return $scope.ovz($rootScope.kvz)};
-   $scope.s2=$scope.otr($rootScope.ktr);
-   $scope.s3=$scope.nvr($rootScope.kvr, $rootScope.ktr, $rootScope.kvz);
-   $scope.s4=$scope.nops($rootScope.kvr, $rootScope.ktr, $rootScope.kvz, $rootScope.ops);
-   $scope.s5=$scope.sro($rootScope.ktr, $rootScope.ro);
-   $scope.s6=$scope.spr($rootScope.ktr, $rootScope.pzb, $rootScope.kvr);
+   //$scope.Sum1=function() {$scope.s1 = $scope.ovz($rootScope.kvz)};
+   //$scope.s2=$scope.otr($rootScope.ktr);
+ //  $scope.s3=$scope.nvr($rootScope.kvr, $rootScope.ktr, $rootScope.kvz);
+  // $scope.s4=$scope.nops($rootScope.kvr, $rootScope.ktr, $rootScope.kvz, $rootScope.ops);
+   //$scope.s5=$scope.sro($rootScope.ktr, $rootScope.ro);
+  // $scope.s6=$scope.spr($rootScope.ktr, $rootScope.pzb, $rootScope.kvr);
   
-   $scope.SumGZ = function() {return Math.round(($scope.s1_vz()+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
+   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
    $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
 
 $scope.searchTermVZ;
