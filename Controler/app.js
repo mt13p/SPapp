@@ -1,3 +1,4 @@
+
 function InitFunck($http, $rootScope) {
   var InitFunck = {};
   
@@ -56,6 +57,42 @@ function InitFunck($http, $rootScope) {
      for (i = 0; i < len; i++) {if ($datain[i][$key]===$sval) {return $datain[i][$key2];}}
      return 0;
   };
+  InitFunck.requestFullScreen= function() {
+      var el=document.documentElement;
+      var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+            if (requestMethod) { // Native full screen.
+                requestMethod.call(el);
+            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
+            return false;
+   };
+   
+   InitFunck.cancelFullScreen= function() {
+  	var el = document;
+      var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen;
+            if (requestMethod) { // cancel full screen.
+                requestMethod.call(el);
+            } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+                var wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }
+            }
+   };
+   
+   InitFunck.toggleFullScreen= function() {
+     var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||  (document.mozFullScreen || document.webkitIsFullScreen);
+     if (isInFullScreen) {
+           InitFunck.cancelFullScreen();
+      } else {
+          InitFunck.requestFullScreen();
+      }
+       return false;
+     };       
   return InitFunck;
 }
 
@@ -70,7 +107,9 @@ function($routeProvider, $mdThemingProvider) {
   .when('/', {
     templateUrl : 'view/home.html',
     controller  : 'HomeController',
-    resolve : {function(InitFunck) {InitFunck.hideshowFAB(true);}
+    resolve : {function(InitFunck) {
+     InitFunck.hideshowFAB(true);
+     InitFunck.requestFullScreen();}
      }
   })
   .when('/calculator', {
@@ -79,6 +118,7 @@ function($routeProvider, $mdThemingProvider) {
     resolve : {function(InitFunck) {
          InitFunck.hideshowFAB(false);
          if (!InitFunck.initialized) {InitFunck.initialize()};
+         InitFunck.requestFullScreen();
         }
      }
   })
@@ -88,13 +128,16 @@ function($routeProvider, $mdThemingProvider) {
     resolve : {function(InitFunck) {
         InitFunck.hideshowFAB(true);
         if (!InitFunck.initialized) {InitFunck.initialize()};
+        InitFunck.requestFullScreen();
         }
      }
   })
   .when('/about', {
     templateUrl : 'view/about.html',
     controller  : 'AboutController',
-    resolve : {function(InitFunck) {InitFunck.hideshowFAB(true);}
+    resolve : {function(InitFunck) {
+     InitFunck.hideshowFAB(true);
+     InitFunck.requestFullScreen();}
      }
   })
   .otherwise({redirectTo: '/'});
@@ -107,7 +150,9 @@ $mdThemingProvider.theme('dark-pink').backgroundPalette('pink').dark()
 $mdThemingProvider.theme('grey').backgroundPalette('grey')
 })
 
-//.run(function($http, $rootScope, InitFunck){})
+//.run(function($http, $rootScope, InitFunck){
+	//InitFunck.requestFullScreen();
+//})
 
 
 .controller('MainMenu', function($scope, $mdSidenav, $location, $anchorScroll) {
@@ -278,6 +323,15 @@ $scope.searchTermVZ;
       $scope.clearSearchTermTR= function() {
         $scope.searchTermTR= '';
       };
+ 
+ $scope.toggleFullScreen= InitFunck.toggleFullScreen;
+ 
+ // $scope.toggleFullScreen= function() {
+   //   var elem=document.documentElement;
+     // if (elem.webkitRequestFullscreen) {
+     //   elem.webkitRequestFullscreen();
+    //  }
+//   };
 
   const el_clm_calc = document.getElementById('clm_calc');
 
