@@ -37,7 +37,8 @@ function InitFunck($http, $rootScope) {
     $rootScope.ro="0";
     $rootScope.pzb="1";
     InitFunck.changeflagPrem(1);  
-    $rootScope.json_prem=$rootScope.json_kpr1s;
+    InitFunck.changePrembyVR(0);
+    //$rootScope.json_prem=$rootScope.json_kpr1s;
   };
   InitFunck.changeflagPrem = function (selectvalue) {
   	$rootScope.flag_prem = selectvalue;
@@ -49,6 +50,17 @@ function InitFunck($http, $rootScope) {
          InitFunck.changeflagPrem(1);
       }
    };
+   InitFunck.changePrembyVR = function(vr) 
+    {
+      if (vr=="0") {
+    	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr1s};
+        if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr3s};
+      } else {
+    	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr2s};
+        if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr4s};
+     }
+    };
+   
   InitFunck.hideshowFAB = function (selectvalue) {
   	$rootScope.fabhiddenglobal = selectvalue;
   };
@@ -291,26 +303,16 @@ const scrollFunc = () => {
   $scope.nops = function($kvr=0, $ktr=0, $kvz=0, $ops=1) {return Math.round((($scope.ovz($kvz)+$scope.otr($ktr)+$scope.nvr($kvr, $ktr, $kvz))*($scope.kops($ops)/100))*100)/100};
   $scope.kro = function($kro=0) {return $kro*100};
   $scope.sro = function($ktr=0, $kro=0)  {return Math.round(($kro*$scope.otr($ktr))*100)/100};
+  
+  
   $scope.kpr = function($ktr=0, $kpzb=0, $kvr=0) {
   	var vr = InitFunck.GetValbyKey($kvr, 'kvr', 'vr', $rootScope.json_vres);
-      if (vr>=1) {
-  	  if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr2s};
-        if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr4s};
-      } else {
-    	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr1s};
-        if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr3s};
-     };
+    // alert(vr);
+     InitFunck.changePrembyVR(vr);
      var tr=InitFunck.GetValbyKey($ktr, 'ktr', 'tr', $rootScope.json_tres);
      var pr=InitFunck.GetValbyKey(tr, 'kpr', 'pr', $rootScope.json_prem);
      return Math.round($kpzb*pr*100*100)/100};
      $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
-  
-   //$scope.Sum1=function() {$scope.s1 = $scope.ovz($rootScope.kvz)};
-   //$scope.s2=$scope.otr($rootScope.ktr);
- //  $scope.s3=$scope.nvr($rootScope.kvr, $rootScope.ktr, $rootScope.kvz);
-  // $scope.s4=$scope.nops($rootScope.kvr, $rootScope.ktr, $rootScope.kvz, $rootScope.ops);
-   //$scope.s5=$scope.sro($rootScope.ktr, $rootScope.ro);
-  // $scope.s6=$scope.spr($rootScope.ktr, $rootScope.pzb, $rootScope.kvr);
   
    $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
    $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
