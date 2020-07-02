@@ -18,18 +18,473 @@ function InitFunck($http, $rootScope) {
    //  alert( xhr.responseText ); // responseText -- текст ответа.
     };
   };
+  InitFunck.getPosition =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[{"name":"Текелажник", "vz":"солдат", "tr":"1", "vr":"від 1 до 4", "ro":"без допуску"},
+ {"name":"Командир взводу", "vz":"лейтенант", "tr":"12", "vr":"від 5 до 9", "ro":"без допуску"},
+  {"name":"Командир роти", "vz":"капітан", "tr":"20", "vr":"від 10 до 14", "ro":"без допуску"},
+  {"name":"Командир батальйону", "vz":"майор", "tr":"25", "vr":"від 15 до 19", "ro":"3 форма"},
+  {"name":"Командир полку", "vz":"полковник", "tr":"31", "vr":"від 20 до 24", "ro":"2 форма"},
+  {"name":"Командир бригади", "vz":"полковник", "tr":"39", "vr":"25 і більше", "ro":"1 форма"},
+  {"name":"Старший офіцер", "vz":"підполковник", "tr":"30", "vr":"від 20 до 24", "ro":"3 форма"},
+  {"name":"Заступник нач. від. 39 т.р.", "vz":"підполковник", "tr":"39", "vr":"від 20 до 24", "ro":"без допуску"},
+  {"name":"Заступник нач. від. 46 т.р.", "vz":"підполковник", "tr":"46", "vr":"від 20 до 24", "ro":"без допуску"}];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_vzes =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kvz":"0.3", "vz":"солдат"},
+  {"kvz":"0.34", "vz":"старший солдат"},
+  {"kvz":"0.38", "vz":"молодший сержант"},
+  {"kvz":"0.42", "vz":"сержант"},
+  {"kvz":"0.46", "vz":"старший сержант"},
+  {"kvz":"0.5", "vz":"старшина"},
+  {"kvz":"0.54", "vz":"прапорщик"},
+  {"kvz":"0.58", "vz":"старший прапорщик"},
+  {"kvz":"0.6", "vz":"молодший лейтенант"},
+  {"kvz":"0.64", "vz":"лейтенант"},
+  {"kvz":"0.68", "vz":"старший лейтенант"},
+  {"kvz":"0.72", "vz":"капітан"},
+  {"kvz":"0.76", "vz":"майор"},
+  {"kvz":"0.8", "vz":"підполковник"},
+  {"kvz":"0.84", "vz":"полковник"},
+  {"kvz":"0.88", "vz":"генерал-майор"},
+  {"kvz":"0.92", "vz":"генерал-лейтенант"},
+  {"kvz":"0.96", "vz":"генерал-полковник"},
+  {"kvz":"1.0", "vz":"генерал армії України"}];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_tres =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"ktr":"1.4", "tr":"1"},
+  {"ktr":"1.45", "tr":"2"},
+  {"ktr":"1.5", "tr":"3"},
+  {"ktr":"1.55", "tr":"4"},
+  {"ktr":"1.6", "tr":"5"},
+  {"ktr":"1.65", "tr":"6"},
+  {"ktr":"1.7", "tr":"7"},
+  {"ktr":"1.75", "tr":"8"},
+  {"ktr":"1.8", "tr":"9"},
+  {"ktr":"1.85", "tr":"10"},
+  {"ktr":"1.9", "tr":"11"},
+  {"ktr":"1.95", "tr":"12"},
+  {"ktr":"2.00", "tr":"13"},
+  {"ktr":"2.08", "tr":"14"},
+  {"ktr":"2.16", "tr":"15"},
+  {"ktr":"2.24", "tr":"16"},
+  {"ktr":"2.32", "tr":"17"},
+  {"ktr":"2.4", "tr":"18"},
+  {"ktr":"2.48", "tr":"19"},
+  {"ktr":"2.56", "tr":"20"},
+  {"ktr":"2.64", "tr":"21"},
+  {"ktr":"2.72", "tr":"22"},
+  {"ktr":"2.8", "tr":"23"},
+  {"ktr":"2.88", "tr":"24"},
+  {"ktr":"2.96", "tr":"25"},
+  {"ktr":"3.04", "tr":"26"},
+  {"ktr":"3.12", "tr":"27"},
+  {"ktr":"3.2", "tr":"28"},
+  {"ktr":"3.28", "tr":"29"},
+  {"ktr":"3.36", "tr":"30"},
+  {"ktr":"3.44", "tr":"31"},
+  {"ktr":"3.52", "tr":"32"},
+  {"ktr":"3.6", "tr":"33"},
+  {"ktr":"3.68", "tr":"34"},
+  {"ktr":"3.76", "tr":"35"},
+  {"ktr":"3.84", "tr":"36"},
+  {"ktr":"3.92", "tr":"37"},
+  {"ktr":"4", "tr":"38"},
+  {"ktr":"4.08", "tr":"39"},
+  {"ktr":"4.16", "tr":"40"},
+  {"ktr":"4.24", "tr":"41"},
+  {"ktr":"4.32", "tr":"42"},
+  {"ktr":"4.4", "tr":"43"},
+  {"ktr":"4.48", "tr":"44"},
+  {"ktr":"4.56", "tr":"45"},
+  {"ktr":"4.64", "tr":"46"},
+  {"ktr":"4.72", "tr":"47"},
+  {"ktr":"4.8", "tr":"48"},
+  {"ktr":"4.88", "tr":"49"},
+  {"ktr":"4.96", "tr":"50"},
+  {"ktr":"5.04", "tr":"51"},
+  {"ktr":"5.12", "tr":"52"},
+  {"ktr":"5.2", "tr":"53"},
+  {"ktr":"5.28", "tr":"54"},
+  {"ktr":"5.36", "tr":"55"},
+  {"ktr":"5.44", "tr":"56"},
+  {"ktr":"5.52", "tr":"57"},
+  {"ktr":"5.6", "tr":"58"},
+  {"ktr":"5.68", "tr":"59"},
+  {"ktr":"5.76", "tr":"60"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_vres =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kvr":"0", "vr":"0"},
+  {"kvr":"0.25", "vr":"від 1 до 4"},
+  {"kvr":"0.3", "vr":"від 5 до 9"},
+  {"kvr":"0.35", "vr":"від 10 до 14"},
+  {"kvr":"0.4", "vr":"від 15 до 19"},
+  {"kvr":"0.45", "vr":"від 20 до 24"},
+  {"kvr":"0.5", "vr":"25 і більше"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kops =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kops":"1", "ops":"1"},
+  {"kops":"1.05", "ops":"1.05"},
+  {"kops":"1.1", "ops":"1.1"},
+  {"kops":"1.2", "ops":"1.2"},
+  {"kops":"1.25", "ops":"1.25"},
+  {"kops":"1.3", "ops":"1.3"},
+  {"kops":"1.35", "ops":"1.35"},
+  {"kops":"1.45", "ops":"1.45"},
+  {"kops":"1.55", "ops":"1.55"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kro =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kro":"0", "ro":"без допуску"},
+  {"kro":"0.1", "ro":"3 форма"},
+  {"kro":"0.15", "ro":"2 форма"},
+  {"kro":"0.2", "ro":"1 форма"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kpr1 =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpr":"0", "pr":"0"},
+  {"kpr":"1", "pr":"2.1"},
+  {"kpr":"2", "pr":"1.99"},
+  {"kpr":"3", "pr":"1.87"},
+  {"kpr":"4", "pr":"1.76"},
+  {"kpr":"5", "pr":"1.66"},
+  {"kpr":"6", "pr":"1.56"},
+  {"kpr":"7", "pr":"1.47"},
+  {"kpr":"8", "pr":"1.39"},
+  {"kpr":"9", "pr":"1.31"},
+  {"kpr":"10", "pr":"1.23"},
+  {"kpr":"11", "pr":"1.16"},
+  {"kpr":"12", "pr":"1.09"},
+  {"kpr":"13", "pr":"1.03"},
+  {"kpr":"14", "pr":"0.93"},
+  {"kpr":"15", "pr":"0.83"},
+  {"kpr":"16", "pr":"0.75"},
+  {"kpr":"17", "pr":"0.67"},
+  {"kpr":"18", "pr":"0.6"},
+  {"kpr":"19", "pr":"0.53"},
+  {"kpr":"20", "pr":"0.47"},
+  {"kpr":"21", "pr":"0.41"},
+  {"kpr":"22", "pr":"0.4"},
+  {"kpr":"23", "pr":"0.35"},
+  {"kpr":"24", "pr":"0.35"},
+  {"kpr":"25", "pr":"0.35"},
+  {"kpr":"26", "pr":"0.35"},
+  {"kpr":"27", "pr":"0.35"},
+  {"kpr":"28", "pr":"0.35"},
+  {"kpr":"29", "pr":"0.35"},
+  {"kpr":"30", "pr":"0.35"},
+  {"kpr":"31", "pr":"0.35"},
+  {"kpr":"32", "pr":"0.35"},
+  {"kpr":"33", "pr":"0.35"},
+  {"kpr":"34", "pr":"0.35"},
+  {"kpr":"35", "pr":"0.35"},
+  {"kpr":"36", "pr":"0.35"},
+  {"kpr":"37", "pr":"0.35"},
+  {"kpr":"38", "pr":"0.35"},
+  {"kpr":"39", "pr":"0.35"},
+  {"kpr":"40", "pr":"0.35"},
+  {"kpr":"41", "pr":"0.35"},
+  {"kpr":"42", "pr":"0.35"},
+  {"kpr":"43", "pr":"0.35"},
+  {"kpr":"44", "pr":"0.35"},
+  {"kpr":"45", "pr":"0.35"},
+  {"kpr":"46", "pr":"0.35"},
+  {"kpr":"47", "pr":"0.35"},
+  {"kpr":"48", "pr":"0.35"},
+  {"kpr":"49", "pr":"0.35"},
+  {"kpr":"50", "pr":"0.35"},
+  {"kpr":"51", "pr":"0.35"},
+  {"kpr":"52", "pr":"0.35"},
+  {"kpr":"53", "pr":"0.35"},
+  {"kpr":"54", "pr":"0.35"},
+  {"kpr":"55", "pr":"0.35"},
+  {"kpr":"56", "pr":"0.35"},
+  {"kpr":"57", "pr":"0.35"},
+  {"kpr":"58", "pr":"0.35"},
+  {"kpr":"59", "pr":"0.35"},
+  {"kpr":"60", "pr":"0.35"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kpr2 =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpr":"0", "pr":"0"},
+  {"kpr":"1", "pr":"1.61"},
+  {"kpr":"2", "pr":"1.5"},
+  {"kpr":"3", "pr":"1.38"},
+  {"kpr":"4", "pr":"1.3"},
+  {"kpr":"5", "pr":"1.23"},
+  {"kpr":"6", "pr":"1.16"},
+  {"kpr":"7", "pr":"1.1"},
+  {"kpr":"8", "pr":"1.05"},
+  {"kpr":"9", "pr":"1"},
+  {"kpr":"10", "pr":"0.95"},
+  {"kpr":"11", "pr":"0.91"},
+  {"kpr":"12", "pr":"0.87"},
+  {"kpr":"13", "pr":"0.84"},
+  {"kpr":"14", "pr":"0.77"},
+  {"kpr":"15", "pr":"0.7"},
+  {"kpr":"16", "pr":"0.65"},
+  {"kpr":"17", "pr":"0.6"},
+  {"kpr":"18", "pr":"0.57"},
+  {"kpr":"19", "pr":"0.53"},
+  {"kpr":"20", "pr":"0.47"},
+  {"kpr":"21", "pr":"0.41"},
+  {"kpr":"22", "pr":"0.4"},
+  {"kpr":"23", "pr":"0.35"},
+  {"kpr":"24", "pr":"0.35"},
+  {"kpr":"25", "pr":"0.35"},
+  {"kpr":"26", "pr":"0.35"},
+  {"kpr":"27", "pr":"0.35"},
+  {"kpr":"28", "pr":"0.35"},
+  {"kpr":"29", "pr":"0.35"},
+  {"kpr":"30", "pr":"0.35"},
+  {"kpr":"31", "pr":"0.35"},
+  {"kpr":"32", "pr":"0.35"},
+  {"kpr":"33", "pr":"0.35"},
+  {"kpr":"34", "pr":"0.35"},
+  {"kpr":"35", "pr":"0.35"},
+  {"kpr":"36", "pr":"0.35"},
+  {"kpr":"37", "pr":"0.35"},
+  {"kpr":"38", "pr":"0.35"},
+  {"kpr":"39", "pr":"0.35"},
+  {"kpr":"40", "pr":"0.35"},
+  {"kpr":"41", "pr":"0.35"},
+  {"kpr":"42", "pr":"0.35"},
+  {"kpr":"43", "pr":"0.35"},
+  {"kpr":"44", "pr":"0.35"},
+  {"kpr":"45", "pr":"0.35"},
+  {"kpr":"46", "pr":"0.35"},
+  {"kpr":"47", "pr":"0.35"},
+  {"kpr":"48", "pr":"0.35"},
+  {"kpr":"49", "pr":"0.35"},
+  {"kpr":"50", "pr":"0.35"},
+  {"kpr":"51", "pr":"0.35"},
+  {"kpr":"52", "pr":"0.35"},
+  {"kpr":"53", "pr":"0.35"},
+  {"kpr":"54", "pr":"0.35"},
+  {"kpr":"55", "pr":"0.35"},
+  {"kpr":"56", "pr":"0.35"},
+  {"kpr":"57", "pr":"0.35"},
+  {"kpr":"58", "pr":"0.35"},
+  {"kpr":"59", "pr":"0.35"},
+  {"kpr":"60", "pr":"0.35"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kpr3 =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpr":"0", "pr":"0"},
+  {"kpr":"1", "pr":"2.18"},
+  {"kpr":"2", "pr":"2.1"},
+  {"kpr":"3", "pr":"2.01"},
+  {"kpr":"4", "pr":"1.93"},
+  {"kpr":"5", "pr":"1.85"},
+  {"kpr":"6", "pr":"1.77"},
+  {"kpr":"7", "pr":"1.69"},
+  {"kpr":"8", "pr":"1.61"},
+  {"kpr":"9", "pr":"1.54"},
+  {"kpr":"10", "pr":"1.46"},
+    {"kpr":"11", "pr":"1.39"},
+  {"kpr":"12", "pr":"1.32"},
+  {"kpr":"13", "pr":"1.25"},
+  {"kpr":"14", "pr":"1.18"},
+  {"kpr":"15", "pr":"1.12"},
+  {"kpr":"16", "pr":"1.05"},
+  {"kpr":"17", "pr":"0.99"},
+  {"kpr":"18", "pr":"0.93"},
+  {"kpr":"19", "pr":"0.87"},
+  {"kpr":"20", "pr":"0.81"},
+  {"kpr":"21", "pr":"0.75"},
+  {"kpr":"22", "pr":"0.7"},
+  {"kpr":"23", "pr":"0.65"},
+  {"kpr":"24", "pr":"0.6"},
+  {"kpr":"25", "pr":"0.55"},
+  {"kpr":"26", "pr":"0.5"},
+  {"kpr":"27", "pr":"0.45"},
+  {"kpr":"28", "pr":"0.41"},
+  {"kpr":"29", "pr":"0.36"},
+  {"kpr":"30", "pr":"0.35"},
+  {"kpr":"31", "pr":"0.35"},
+  {"kpr":"32", "pr":"0.35"},
+  {"kpr":"33", "pr":"0.35"},
+  {"kpr":"34", "pr":"0.35"},
+  {"kpr":"35", "pr":"0.35"},
+  {"kpr":"36", "pr":"0.35"},
+  {"kpr":"37", "pr":"0.35"},
+  {"kpr":"38", "pr":"0.35"},
+  {"kpr":"39", "pr":"0.35"},
+  {"kpr":"40", "pr":"0.35"},
+  {"kpr":"41", "pr":"0.35"},
+  {"kpr":"42", "pr":"0.35"},
+  {"kpr":"43", "pr":"0.35"},
+  {"kpr":"44", "pr":"0.35"},
+  {"kpr":"45", "pr":"0.35"},
+  {"kpr":"46", "pr":"0.35"},
+  {"kpr":"47", "pr":"0.35"},
+  {"kpr":"48", "pr":"0.35"},
+  {"kpr":"49", "pr":"0.35"},
+  {"kpr":"50", "pr":"0.35"},
+  {"kpr":"51", "pr":"0.35"},
+  {"kpr":"52", "pr":"0.35"},
+  {"kpr":"53", "pr":"0.35"},
+  {"kpr":"54", "pr":"0.35"},
+  {"kpr":"55", "pr":"0.35"},
+  {"kpr":"56", "pr":"0.35"},
+  {"kpr":"57", "pr":"0.35"},
+  {"kpr":"58", "pr":"0.35"},
+  {"kpr":"59", "pr":"0.35"},
+  {"kpr":"60", "pr":"0.35"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kpr4 =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpr":"0", "pr":"0"},
+  {"kpr":"1", "pr":"1.98"},
+  {"kpr":"2", "pr":"1.91"},
+  {"kpr":"3", "pr":"1.83"},
+  {"kpr":"4", "pr":"1.76"},
+  {"kpr":"5", "pr":"1.69"},
+  {"kpr":"6", "pr":"1.62"},
+  {"kpr":"7", "pr":"1.55"},
+  {"kpr":"8", "pr":"1.48"},
+  {"kpr":"9", "pr":"1.42"},
+  {"kpr":"10", "pr":"1.35"},
+  {"kpr":"11", "pr":"1.29"},
+  {"kpr":"12", "pr":"1.23"},
+  {"kpr":"13", "pr":"1.17"},
+  {"kpr":"14", "pr":"1.11"},
+  {"kpr":"15", "pr":"1.06"},
+  {"kpr":"16", "pr":"1.0"},
+  {"kpr":"17", "pr":"0.95"},
+  {"kpr":"18", "pr":"0.9"},
+  {"kpr":"19", "pr":"0.85"},
+  {"kpr":"20", "pr":"0.8"},
+  {"kpr":"21", "pr":"0.75"},
+  {"kpr":"22", "pr":"0.7"},
+  {"kpr":"23", "pr":"0.65"},
+  {"kpr":"24", "pr":"0.6"},
+  {"kpr":"25", "pr":"0.55"},
+  {"kpr":"26", "pr":"0.5"},
+  {"kpr":"27", "pr":"0.45"},
+  {"kpr":"28", "pr":"0.41"},
+  {"kpr":"29", "pr":"0.36"},
+  {"kpr":"30", "pr":"0.35"},
+  {"kpr":"31", "pr":"0.35"},
+  {"kpr":"32", "pr":"0.35"},
+  {"kpr":"33", "pr":"0.35"},
+  {"kpr":"34", "pr":"0.35"},
+  {"kpr":"35", "pr":"0.35"},
+  {"kpr":"36", "pr":"0.35"},
+  {"kpr":"37", "pr":"0.35"},
+  {"kpr":"38", "pr":"0.35"},
+  {"kpr":"39", "pr":"0.35"},
+  {"kpr":"40", "pr":"0.35"},
+  {"kpr":"41", "pr":"0.35"},
+  {"kpr":"42", "pr":"0.35"},
+  {"kpr":"43", "pr":"0.35"},
+  {"kpr":"44", "pr":"0.35"},
+  {"kpr":"45", "pr":"0.35"},
+  {"kpr":"46", "pr":"0.35"},
+  {"kpr":"47", "pr":"0.35"},
+  {"kpr":"48", "pr":"0.35"},
+  {"kpr":"49", "pr":"0.35"},
+  {"kpr":"50", "pr":"0.35"},
+  {"kpr":"51", "pr":"0.35"},
+  {"kpr":"52", "pr":"0.35"},
+  {"kpr":"53", "pr":"0.35"},
+  {"kpr":"54", "pr":"0.35"},
+  {"kpr":"55", "pr":"0.35"},
+  {"kpr":"56", "pr":"0.35"},
+  {"kpr":"57", "pr":"0.35"},
+  {"kpr":"58", "pr":"0.35"},
+  {"kpr":"59", "pr":"0.35"},
+  {"kpr":"60", "pr":"0.35"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
+  InitFunck.gettbl_kpzb =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpzb":"1", "pzb":"100%, без стягнень"},
+  {"kpzb":"0.9", "pzb":"90%, -10%"},
+  {"kpzb":"0.8", "pzb":"80%, -20%"},
+  {"kpzb":"0.7", "pzb":"70%, -30%"},
+  {"kpzb":"0.6", "pzb":"60%, -40%"},
+  {"kpzb":"0.5", "pzb":"50%, -50%"},
+  {"kpzb":"0", "pzb":"0%, -100%"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+  
   InitFunck.initialize = function () {
-    $rootScope.positions=InitFunck.getJSON('Data/position.json');
-    $rootScope.json_vzes=InitFunck.getJSON('Data/tbl_vzes.json');
-    $rootScope.json_tres=InitFunck.getJSON('Data/tbl_tres.json');
-    $rootScope.json_vres=InitFunck.getJSON('Data/tbl_vres.json');
-    $rootScope.json_kopses=InitFunck.getJSON('Data/tbl_kops.json');
-    $rootScope.json_kros=InitFunck.getJSON('Data/tbl_kro.json');
-    $rootScope.json_kpr1s=InitFunck.getJSON('Data/tbl_kpr1.json');
-    $rootScope.json_kpr2s=InitFunck.getJSON('Data/tbl_kpr2.json');
-    $rootScope.json_kpr3s=InitFunck.getJSON('Data/tbl_kpr3.json');
-    $rootScope.json_kpr4s=InitFunck.getJSON('Data/tbl_kpr4.json');
-    $rootScope.json_kpzbs=InitFunck.getJSON('Data/tbl_kpzb.json');
+    $rootScope.positions=InitFunck.getPosition();
+    $rootScope.json_vzes=InitFunck.gettbl_vzes();
+    $rootScope.json_tres=InitFunck.gettbl_tres();
+    $rootScope.json_vres=InitFunck.gettbl_vres();
+    $rootScope.json_kopses=InitFunck.gettbl_kops();
+    $rootScope.json_kros=InitFunck.gettbl_kro();
+    $rootScope.json_kpr1s=InitFunck.gettbl_kpr1();
+    $rootScope.json_kpr2s=InitFunck.gettbl_kpr2();
+    $rootScope.json_kpr3s=InitFunck.gettbl_kpr3();
+    $rootScope.json_kpr4s=InitFunck.gettbl_kpr4();
+    $rootScope.json_kpzbs=InitFunck.gettbl_kpzb();
     $rootScope.kvz="0.3";
     $rootScope.ktr="1.4";
     $rootScope.kvr="0";
