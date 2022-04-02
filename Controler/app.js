@@ -788,9 +788,9 @@ const scrollFunc = () => {
       }); 
       self.printBranch = function(item) {
         document.getElementById('SelectedBranch').innerHTML = item.name + ' ЗСУ';
-        if (selname=="Десантно-штурмові війська")  {
+        if (item.name=="Десантно-штурмові війська")  {
           InitFunck.changeflagPrem(2);
-        }  else if (selname=="Сили спеціальних операцій") { 
+        }  else if (item.name=="Сили спеціальних операцій") { 
 	  InitFunck.changeflagPrem(3); 
         } else {
           InitFunck.changeflagPrem(1);
