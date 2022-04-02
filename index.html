@@ -270,6 +270,32 @@
        </md-content>
      </div>
      
+     <div layout="row" layout-align="space-between center" align="center" flex>
+      <md-content layout="row" flex>
+      <md-card md-theme="{{'grey'}}" md-theme-watch style="width:75%">
+      	<md-card-actions>
+               <md-input-container>
+                <label>Надбавка ССО</label>
+                <md-select ng-model="pzb" style="min-width: 200px;">
+               	<md-option ng-repeat="json_kpzb in json_kpzbs" ng-value="json_kpzb.kpzb">
+                     {{json_kpzb.pzb}}
+                  </md-option>
+                 </md-select>
+               </md-input-container>
+               <span>Розмір: {{kpr(ktr, pzb, kvr)}}%</span>
+             </span>
+           </md-card-actions>
+       </md-card>
+      <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
+      	<md-card-actions>
+              <span class="Numbers_sum" ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}
+              грн.
+             </span>
+           </md-card-actions>
+       </md-card>
+       </md-content>
+     </div>
+     
       <md-card md-theme="{{'grey'}}" md-theme-watch>
         <md-card-actions layout="row" layout-align="space around">
               <md-card-title>
