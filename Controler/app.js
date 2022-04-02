@@ -579,9 +579,11 @@ function InitFunck($http, $rootScope) {
   	$rootScope.flag_prem = selectvalue;
   };
   InitFunck.changeflagPrembyname= function (selname) {
-      if ((selname=="Десантно-штурмові війська") || (selname=="Сили спеціальних операцій")) {
+      if (selname=="Десантно-штурмові війська")  {
           InitFunck.changeflagPrem(2);
-      } else {
+      }  else if (selname=="Сили спеціальних операцій") { 
+	  InitFunck.changeflagPrem(3); 
+      }  else {
          InitFunck.changeflagPrem(1);
       }
    };
@@ -590,9 +592,11 @@ function InitFunck($http, $rootScope) {
       if (vr=="0") {
     	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr1s};
         if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr3s};
+	if ($rootScope.flag_prem==3) {$rootScope.json_prem=$rootScope.json_kpr5s};      
       } else {
     	if ($rootScope.flag_prem==1) {$rootScope.json_prem=$rootScope.json_kpr2s};
         if ($rootScope.flag_prem==2) {$rootScope.json_prem=$rootScope.json_kpr4s};
+	if ($rootScope.flag_prem==3) {$rootScope.json_prem=$rootScope.json_kpr5s};      
      }
     };
    
@@ -784,12 +788,14 @@ const scrollFunc = () => {
       }); 
       self.printBranch = function(item) {
         document.getElementById('SelectedBranch').innerHTML = item.name + ' ЗСУ';
-        if ((item.name=="Десантно-штурмові війська") || (item.name=="Сили спеціальних операцій")) {
+        if (selname=="Десантно-штурмові війська")  {
           InitFunck.changeflagPrem(2);
+        }  else if (selname=="Сили спеціальних операцій") { 
+	  InitFunck.changeflagPrem(3); 
         } else {
           InitFunck.changeflagPrem(1);
         }
-  	 };
+      };
       self.openDialog = function($event, item) {
       	//ng-click="demo.openDialog($event, item)"
         // Show the dialog
