@@ -465,7 +465,77 @@ function InitFunck($http, $rootScope) {
   InitFunck.initialized = true;
   return tmpJSON;
   	};
-  
+	
+  InitFunck.gettbl_kpr5 =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"kpr":"0", "pr":"0"},
+  {"kpr":"1", "pr":"1.7"},
+  {"kpr":"2", "pr":"1.5"},
+  {"kpr":"3", "pr":"1.5"},
+  {"kpr":"4", "pr":"1.5"},
+  {"kpr":"5", "pr":"1.4"},
+  {"kpr":"6", "pr":"1.4"},
+  {"kpr":"7", "pr":"1.4"},
+  {"kpr":"8", "pr":"1.3"},
+  {"kpr":"9", "pr":"1.3"},
+  {"kpr":"10", "pr":"1.3"},
+  {"kpr":"11", "pr":"1.3"},
+  {"kpr":"12", "pr":"1.3"},
+  {"kpr":"13", "pr":"1.2"},
+  {"kpr":"14", "pr":"1.2"},
+  {"kpr":"15", "pr":"1.2"},
+  {"kpr":"16", "pr":"1.2"},
+  {"kpr":"17", "pr":"1.1"},
+  {"kpr":"18", "pr":"1.1"},
+  {"kpr":"19", "pr":"1.1"},
+  {"kpr":"20", "pr":"1.1"},
+  {"kpr":"21", "pr":"1.1"},
+  {"kpr":"22", "pr":"1"},
+  {"kpr":"23", "pr":"1"},
+  {"kpr":"24", "pr":"1"},
+  {"kpr":"25", "pr":"1"},
+  {"kpr":"26", "pr":"1"},
+  {"kpr":"27", "pr":"1"},
+  {"kpr":"28", "pr":"1"},
+  {"kpr":"29", "pr":"1"},
+  {"kpr":"30", "pr":"1"},
+  {"kpr":"31", "pr":"1"},
+  {"kpr":"32", "pr":"1"},
+  {"kpr":"33", "pr":"1"},
+  {"kpr":"34", "pr":"1"},
+  {"kpr":"35", "pr":"1"},
+  {"kpr":"36", "pr":"1"},
+  {"kpr":"37", "pr":"1"},
+  {"kpr":"38", "pr":"1"},
+  {"kpr":"39", "pr":"1"},
+  {"kpr":"40", "pr":"1"},
+  {"kpr":"41", "pr":"1"},
+  {"kpr":"42", "pr":"1"},
+  {"kpr":"43", "pr":"1"},
+  {"kpr":"44", "pr":"1"},
+  {"kpr":"45", "pr":"1"},
+  {"kpr":"46", "pr":"1"},
+  {"kpr":"47", "pr":"1"},
+  {"kpr":"48", "pr":"1"},
+  {"kpr":"49", "pr":"1"},
+  {"kpr":"50", "pr":"1"},
+  {"kpr":"51", "pr":"1"},
+  {"kpr":"52", "pr":"1"},
+  {"kpr":"53", "pr":"1"},
+  {"kpr":"54", "pr":"1"},
+  {"kpr":"55", "pr":"1"},
+  {"kpr":"56", "pr":"1"},
+  {"kpr":"57", "pr":"1"},
+  {"kpr":"58", "pr":"1"},
+  {"kpr":"59", "pr":"1"},
+  {"kpr":"60", "pr":"1"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
+	
   InitFunck.gettbl_kpzb =function()  {
   	var tmpJSON;
       InitFunck.initialized = false;
@@ -493,6 +563,7 @@ function InitFunck($http, $rootScope) {
     $rootScope.json_kpr2s=InitFunck.gettbl_kpr2();
     $rootScope.json_kpr3s=InitFunck.gettbl_kpr3();
     $rootScope.json_kpr4s=InitFunck.gettbl_kpr4();
+    $rootScope.json_kpr5s=InitFunck.gettbl_kpr5();  
     $rootScope.json_kpzbs=InitFunck.gettbl_kpzb();
     $rootScope.kvz="0.3";
     $rootScope.ktr="1.4";
