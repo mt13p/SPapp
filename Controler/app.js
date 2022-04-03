@@ -551,7 +551,22 @@ function InitFunck($http, $rootScope) {
   InitFunck.initialized = true;
   return tmpJSON;
   	};
+	
+  InitFunck.gettbl_sso =function()  {
+  	var tmpJSON;
+      InitFunck.initialized = false;
+      tmpJSON=[
+  {"ksso":"0", "sso":"0%"},
+  {"ksso":"0.5", "sso":"50%"},
+  {"ksso":"0.7", "sso":"70%"},
+  {"ksso":"0.8", "sso":"80%"},
+  {"ksso":"1", "sso":"100%"}
+];
+  InitFunck.initialized = true;
+  return tmpJSON;
+  	};
   
+	
   InitFunck.initialize = function () {
     $rootScope.positions=InitFunck.getPosition();
     $rootScope.json_vzes=InitFunck.gettbl_vzes();
@@ -565,12 +580,14 @@ function InitFunck($http, $rootScope) {
     $rootScope.json_kpr4s=InitFunck.gettbl_kpr4();
     $rootScope.json_kpr5s=InitFunck.gettbl_kpr5();  
     $rootScope.json_kpzbs=InitFunck.gettbl_kpzb();
+    $rootScope.json_kssos=InitFunck.gettbl_sso();  
     $rootScope.kvz="0.3";
     $rootScope.ktr="1.4";
     $rootScope.kvr="0";
     $rootScope.ops="1";
     $rootScope.ro="0";
     $rootScope.pzb="1";
+    $rootScope.ksso="0";	  
     InitFunck.changeflagPrem(1);  
     InitFunck.changePrembyVR(0);
     //$rootScope.json_prem=$rootScope.json_kpr1s;
@@ -854,8 +871,9 @@ const scrollFunc = () => {
      var pr=InitFunck.GetValbyKey(tr, 'kpr', 'pr', $rootScope.json_prem);
      return Math.round($kpzb*pr*100*100)/100};
      $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
+   $scope.sso = function($pm=0, $k=0)  {return Math.round($pm*$k)/100};	
   
-   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6)*100)/100};
+   $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6+$scope.s7)*100)/100};
    $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
 
 $scope.searchTermVZ;
