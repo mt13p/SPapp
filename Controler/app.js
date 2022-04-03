@@ -854,7 +854,7 @@ const scrollFunc = () => {
 })
 
 .controller('CalculatorController', function($scope, $rootScope, $http, $location, $anchorScroll, $window, InitFunck) {
-  $scope.message1 = 'Конструктор';
+  $scope.message1 = 'Розрахунок';
   $scope.message2 = 'грошового забезпечення';
   
   $scope.ovz = function($kvz=0) {return Math.round(($kvz*1762)/10)*10};
