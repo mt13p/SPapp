@@ -588,7 +588,7 @@ function InitFunck($http, $rootScope) {
     $rootScope.ro="0";
     $rootScope.pzb="1";
     $rootScope.ksso="0";
-    $rootScope.hideSSO= true; 
+    $rootScope.hideSSO= false; 
     InitFunck.changeflagPrem(1);  
     InitFunck.changePrembyVR(0);
     //$rootScope.json_prem=$rootScope.json_kpr1s;
@@ -599,13 +599,13 @@ function InitFunck($http, $rootScope) {
   InitFunck.changeflagPrembyname= function (selname) {
       if (selname=="Десантно-штурмові війська")  {
           InitFunck.changeflagPrem(2);
-	  $rootScope.hideSSO= true; 
+	  $rootScope.hideSSO= false; 
       }  else if (selname=="Сили спеціальних операцій") { 
 	  InitFunck.changeflagPrem(3); 
-	  $rootScope.hideSSO= false;     
+	  $rootScope.hideSSO= true;     
       }  else {
          InitFunck.changeflagPrem(1);
-	 $rootScope.hideSSO= true;      
+	 $rootScope.hideSSO= false;      
       }
    };
    InitFunck.changePrembyVR = function(vr) 
@@ -811,13 +811,13 @@ const scrollFunc = () => {
         document.getElementById('SelectedBranch').innerHTML = item.name + ' ЗСУ';
         if (item.name=="Десантно-штурмові війська")  {
           InitFunck.changeflagPrem(2);
-	  $rootScope.hideSSO= true; 	
+	  $rootScope.hideSSO= false; 	
         }  else if (item.name=="Сили спеціальних операцій") { 
 	  InitFunck.changeflagPrem(3);
-	  $rootScope.hideSSO= false; 	
+	  $rootScope.hideSSO= true; 	
         } else {
           InitFunck.changeflagPrem(1);
-	  $rootScope.hideSSO= true; 	
+	  $rootScope.hideSSO= false; 	
         }
       };
       self.openDialog = function($event, item) {
