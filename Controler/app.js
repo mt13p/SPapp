@@ -871,7 +871,7 @@ const scrollFunc = () => {
      var pr=InitFunck.GetValbyKey(tr, 'kpr', 'pr', $rootScope.json_prem);
      return Math.round($kpzb*pr*100*100)/100};
      $scope.spr = function($ktr=0, $kpzb=0, $kvr=0)  {return Math.round(($kpzb*($scope.kpr($ktr, $kpzb, $kvr)/100)*$scope.otr($ktr))*100)/100};
-   $scope.sso = function($pm=0, $k=0)  {return Math.round($pm*$k*100*100)/100};	
+   $scope.sso = function($pm=0, $k=0)  {return Math.round($pm*$k*100)/100};	
   
    $scope.SumGZ = function() {return Math.round(($scope.s1+$scope.s2+$scope.s3+$scope.s4+$scope.s5+$scope.s6+$scope.s7)*100)/100};
    $scope.SumGZnaryku = function() {return Math.round($scope.SumGZ()*0.985*100)/100};
