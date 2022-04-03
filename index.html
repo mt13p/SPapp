@@ -276,19 +276,19 @@
       	<md-card-actions>
                <md-input-container>
                 <label>Надбавка ССО</label>
-                <md-select ng-model="pzb" style="min-width: 200px;">
-               	<md-option ng-repeat="json_kpzb in json_kpzbs" ng-value="json_kpzb.kpzb">
-                     {{json_kpzb.pzb}}
+                <md-select ng-model="ksso" style="min-width: 200px;">
+               	<md-option ng-repeat="json_ksso in json_kssos" ng-value="json_ksso.ksso">
+                     {{json_kpzb.sso}}
                   </md-option>
                  </md-select>
                </md-input-container>
-               <span>Розмір: {{kpr(ktr, pzb, kvr)}}%</span>
+               <span>Розмір: {{ksso}}%</span>
              </span>
            </md-card-actions>
        </md-card>
       <md-card md-theme="{{'grey'}}" md-theme-watch layout-align="center center" style="width:25%">
       	<md-card-actions>
-              <span class="Numbers_sum" ng-model="s6">{{s6=spr(ktr, pzb, kvr)}}
+              <span class="Numbers_sum" ng-model="s7">{{s7=sso(2481, ksso)}}
               грн.
              </span>
            </md-card-actions>
