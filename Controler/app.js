@@ -906,7 +906,7 @@ $scope.searchTermVZ;
 
   window.addEventListener("resize", function() {
     //alert(document.documentElement.clientHeight);
-    if (window.matchMedia("(min-width: 400px)").matches) {
+    if (window.matchMedia("(min-width: 412px)").matches) {
         
         el_clm_calc.className = "style_clm_calc full";
         //console.log("Screen width is at least 800px ");
